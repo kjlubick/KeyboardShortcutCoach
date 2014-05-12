@@ -1,0 +1,19 @@
+{
+   "content_scripts": [ {
+      "css": [ "css/notification.css" ],
+      "js": [ "js/jquery-1.7.2.min.js","coach-utils.js", "coach-gmail.js" ],
+      "matches": [ "*://mail.google.com/*", "*://github.com/*" ],
+      "run_at": "document_end"
+   } ],
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+   "description": "Gives a reminder for keyboard shortcuts in an intelligent manner. ",
+   "icons": {
+      "128": "whistle-icon128.png"
+   },
+   "manifest_version": 2,
+   "name": "Keyboard Shortcut Coach",
+   "permissions": [ "*://*.google.com/*", "*://github.com/*"  ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1",
+   "web_accessible_resources": [ "images/close_information.png" ]
+}

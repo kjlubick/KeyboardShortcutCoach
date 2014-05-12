@@ -1,0 +1,93 @@
+﻿#notification {
+	position:  fixed;
+	z-index:  200;
+	right:  15px;
+	top:  100px;
+	font-size:  0.8em;
+	-moz-box-shadow:  0px 0px 3px 3px rgba(0,  0,  0,  0.10);
+	-webkit-box-shadow:  0px 0px 3px 3px rgba(0,  0,  0,  0.10);
+	-o-box-shadow:  0px 0px 3px 3px rgba(0,  0,  0,  0.10);
+	box-shadow:  0px 0px 3px 3px rgba(0,  0,  0,  0.10);
+    background: #74B9D2;
+	color:  #2D2F2A;
+}
+.ie6 #notification {
+	position: absolute;
+}
+#notification .close {
+	color:  #FFF;
+	width:  14px;
+	height:  14px;
+	display:  block;
+	text-decoration:  none;
+	line-height:  14px;
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/close_information.png');
+    background-repeat: no-repeat;
+    background-position: left top;
+    margin: 5px;
+}
+.success {
+	background:  #D4FFCD;
+	border-bottom-color:  #9ADF8F;
+	color:  #258815;
+}
+
+.warning {
+	background:  #FEFCCB;
+	border-bottom-color:  #E5DB55;
+	color:  #878314;
+}
+.error {
+	background:  #FFD2D3;
+	border-bottom-color:  #DF8F90;
+	color:  #871414;
+}
+
+#notification .key {   
+	background-color: #e4e4e4;
+	border: 1px solid #FFF;
+	box-shadow: 0 0 0 1px #8D8D8D;
+	color: #494949;
+	display: inline-block;
+	font-weight:bold;
+	margin-left:5px;
+    margin-right:5px;
+	min-width: 22px;
+	padding: 2px 3px 2px 3px;
+	text-shadow: 0px 1px 0px #FFF;
+	text-align: center;
+}
+
+.kr_main {
+	padding:  21px;
+  float:left;
+  width:234px;
+  background: #FFF;
+}
+
+.settings .kr_main {
+  width: 384px;
+}
+
+.kr_sidemenu {
+  float:right;
+  width: 24px;
+}
+
+#notification .btn {
+  display: inline;
+  padding:8px;
+  background: #74B9D2;
+  color: #fff;
+  white-space: nowrap;
+}
+
+#notification .kr_secondary  {
+  white-space: nowrap;
+  text-decoration: underline;
+  
+}
+.kr_buttons {
+  line-height:35px;
+  margin-top:10px;
+}
