@@ -1,21 +1,28 @@
-﻿/*The MIT License (MIT)
+﻿/*
+The MIT License (MIT)
 
 Copyright (c) 2014 Kevin Lubick
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal 
+in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+IN THE SOFTWARE.
+*/
 
 var timeout = 3000; // default timeout for notifications
 var debug = true; // is this a debug run?
 var supportedLanguages = ['en-GB', 'en-US', 'iw'];
-var clickTargetProcessors = new Array();
+var clickTargetProcessors = [];
 var shortcuts = [];
 var currentNotifications = [];
 
-function cw(s) { //write to console if in debug
+function log(s) { //write to console if in debug
     if (debug) {
         console.log("[KR]" + s);
     }
@@ -33,7 +40,7 @@ function closePopUp(p) {
 function notify(message, type, timeout) {
     //http://notify.dconnell.co.uk/
     // default values
-    var markup;
+    var markup, notification, notificationSpan, notificationClose;
     message = typeof message !== 'undefined' ? message : 'Hello!';
     type = typeof type !== 'undefined' ? type : 'success';
     timeout = typeof timeout !== 'undefined' ? timeout : 3000;
@@ -46,18 +53,18 @@ function notify(message, type, timeout) {
     }
 
     // elements
-    $notification = $('#notification');
-    $notificationSpan = $('#notification div.kr_main');
-    $notificationClose = $('#notification a.close');
+    notification = $('#notification');
+    notificationSpan = $('#notification div.kr_main');
+    notificationClose = $('#notification a.close');
 
     // set the message
-    $notificationSpan.html(message);
+    notificationSpan.html(message);
 
     // setup click event
-    $notificationClose.click(function (e) {
+    notificationClose.click(function (e) {
         e.preventDefault();
-        $notification.stop();
-        closePopUp($notification);
+        notification.stop();
+        closePopUp(notification);
     });
 
     // for ie6, scroll to the top first
@@ -66,9 +73,9 @@ function notify(message, type, timeout) {
     }
 
     // hide old notification, then show the new notification
-    $notification.stop().removeClass().addClass(type).fadeIn('fast', function () {
-        $notification.delay(timeout);
-        closePopUp($notification);
+    notification.stop().removeClass().addClass(type).fadeIn('fast', function () {
+        notification.delay(timeout);
+        closePopUp(notification);
     });
 }
 
@@ -80,10 +87,10 @@ function createShortcut(gE, s, m) {
     result.shortcuts = s; // for example ['g','i']
     // to achieve this
     result.message = m; // 
-    cw('Creating Shortcut');
-    cw('Gui Elements:' + result.guiElements);
-    cw('Shortcuts:' + result.shortcuts.join(' then '));
-    cw('Message:' + result.message);
+    log('Creating Shortcut');
+    log('Gui Elements:' + result.guiElements);
+    log('Shortcuts:' + result.shortcuts.join(' then '));
+    log('Message:' + result.message);
     return result;
 }
 
@@ -115,17 +122,17 @@ function click(e) {
     //this creates t.processedAriaLabel and t.processedText
     $.each(clickTargetProcessors, function (i, f) { f(t); });
 
-    cw('Click t (Target):');
-    cw(t);
-    cw('t.processedText `' + t.processedText + '`');
-    cw('t.text `' + t.text() + '`');
-    cw('t.processedAriaLabel `' + t.processedAriaLabel + '`');
-    cw('t.attr("title") `' + t.attr('title') + '`');
+    log('Click t (Target):');
+    log(t);
+    log('t.processedText `' + t.processedText + '`');
+    log('t.text `' + t.text() + '`');
+    log('t.processedAriaLabel `' + t.processedAriaLabel + '`');
+    log('t.attr("title") `' + t.attr('title') + '`');
     //iterate through all conditions
     $.each(shortcuts, function (i, s) {
         var result = eval(s.guiElements);
         //if condition was met notify and break
-        //cw(i + ' - Evaling: ' + s.guiElements + ' = ' + result);
+        //log(i + ' - Evaling: ' + s.guiElements + ' = ' + result);
         if (result) {
 
             notify_missed_shortcut(s);
@@ -136,7 +143,7 @@ function click(e) {
 
 (function checkForNewIframe(doc, uniq) {
     var iframes, i, contentDocument;
-    cw("Checking for new IFrame (" + doc + "," + uniq + ")");
+    log("Checking for new IFrame (" + doc + "," + uniq + ")");
     try {
         if (!doc) {
             return; // document does not exist. 
@@ -170,7 +177,7 @@ function click(e) {
         }
     } catch (e) {
         //Error: Possibly a frame from another domain?
-        cw('[ERROR] checkForNewIframe: ' + e);
+        log('[ERROR] checkForNewIframe: ' + e);
     }
     checkForNewIframe();
 })(document, 1 + Math.random()); // Initiate recursive function for the document.
