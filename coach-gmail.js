@@ -77,7 +77,7 @@ function fillGMailShortcuts() {
 
 
 //Code that runs on start
-log("Hello startup");
+log("Hello startup" +document.url);
 clickTargetProcessors.push(processText);
 clickTargetProcessors.push(processAriaLabel);
 fillGMailShortcuts();

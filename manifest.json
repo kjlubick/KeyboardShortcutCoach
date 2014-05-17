@@ -5,6 +5,10 @@
       "matches": [ "*://mail.google.com/*", "*://github.com/*" ],
       "run_at": "document_end"
    } ],
+   "background": {
+    "persistent": false,
+    "scripts": ["coach-dispatch.js"]
+  },
    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
    "description": "Gives a reminder for keyboard shortcuts in an intelligent manner. ",
    "icons": {
@@ -12,7 +16,7 @@
    },
    "manifest_version": 2,
    "name": "Keyboard Shortcut Coach",
-   "permissions": [ "*://*.google.com/*", "*://github.com/*"  ],
+   "permissions": [ "*://*.google.com/*", "*://github.com/*", "webNavigation"  ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "0.1",
    "web_accessible_resources": [ "images/close_information.png" ]

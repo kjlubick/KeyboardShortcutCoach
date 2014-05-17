@@ -17,14 +17,13 @@ IN THE SOFTWARE.
 
 var timeout = 3000; // default timeout for notifications
 var debug = true; // is this a debug run?
-var supportedLanguages = ['en-GB', 'en-US', 'iw'];
 var clickTargetProcessors = [];
 var shortcuts = [];
 var currentNotifications = [];
 
 function log(s) { //write to console if in debug
     if (debug) {
-        console.log("[KR]" + s);
+        console.log("[KSC]" + s);
     }
     return true;
 }
@@ -134,7 +133,6 @@ function click(e) {
         //if condition was met notify and break
         //log(i + ' - Evaling: ' + s.guiElements + ' = ' + result);
         if (result) {
-
             notify_missed_shortcut(s);
             return false;
         }
