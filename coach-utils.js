@@ -41,7 +41,7 @@ function notify(message, type, timeout) {
     //http://notify.dconnell.co.uk/
     // default values
     var markup, notification, notificationSpan, notificationClose;
-    message = typeof message !== 'undefined' ? message : 'Hello!';
+    message = typeof message !== 'undefined' ? message : '[blank message]';
     type = typeof type !== 'undefined' ? type : 'ksc_success';
     timeout = typeof timeout !== 'undefined' ? timeout : 3000;
 
@@ -102,7 +102,7 @@ function notify_missed_shortcut(s) {
     if (shortcutLabels.length > 0) {
         n = shortcutLabels.length;
         for (i = 0; i < n; i++) {
-            shortcutLabels[i] = '<span class="key">' + shortcutLabels[i].toUpperCase().replace(' ', '</span> then <span class="key">') + '</span>';
+            shortcutLabels[i] = '<span class="ksc_key">' + shortcutLabels[i].toUpperCase().replace(' ', '</span> then <span class="ksc_key">') + '</span>';
             if (i % 2 == 1) {
                 shortcutLabels.splice(i, 0, ' or ');
             }
@@ -110,7 +110,7 @@ function notify_missed_shortcut(s) {
     }
     text += shortcutLabels.join(' ');
     text += ' ' + s.message;
-    notify(text, 'information', timeout);
+    notify(text, 'ksc_information', timeout);
 }
 
 function click(e) {

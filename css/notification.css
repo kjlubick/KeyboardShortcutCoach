@@ -35,19 +35,8 @@
     color: #258815;
 }
 
-.warning {
-    background: #FEFCCB;
-    border-bottom-color: #E5DB55;
-    color: #878314;
-}
 
-.error {
-    background: #FFD2D3;
-    border-bottom-color: #DF8F90;
-    color: #871414;
-}
-
-#ksc_notification .key {
+#ksc_notification .ksc_key {
     background-color: #e4e4e4;
     border: 1px solid #FFF;
     box-shadow: 0 0 0 1px #8D8D8D;
@@ -69,29 +58,8 @@
     background: #FFF;
 }
 
-.settings .ksc_main {
-    width: 384px;
-}
 
 .ksc_sidemenu {
     float: right;
     width: 24px;
-}
-
-#ksc_notification .btn {
-    display: inline;
-    padding: 8px;
-    background: #74B9D2;
-    color: #fff;
-    white-space: nowrap;
-}
-
-#ksc_notification .ksc_secondary {
-    white-space: nowrap;
-    text-decoration: underline;
-}
-
-.ksc_buttons {
-    line-height: 35px;
-    margin-top: 10px;
 }
