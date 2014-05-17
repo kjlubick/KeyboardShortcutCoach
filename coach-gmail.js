@@ -1,4 +1,4 @@
-﻿/*global log, shortcuts, createShortcut, clickTargetProcessors*/
+﻿/*global log, shortcuts, createShortcut, clickTargetProcessors, click*/
 /*
 The MIT License (MIT)
 
@@ -15,6 +15,48 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 IN THE SOFTWARE.
 */
+
+//gmail loads specially
+(function checkForNewIframe(doc, uniq) {
+    var iframes, i, contentDocument;
+    log("Checking for new IFrame (" + doc + "," + uniq + ")");
+    try {
+        if (!doc) {
+            return; // document does not exist. 
+        }
+
+        // Unique variable to make sure that we're not binding multiple times
+        if (!doc.rwEventsAdded73212312) {
+            //doc.addEventListener('keydown', keyDown, true);
+            //doc.addEventListener('keydown', keyUp, true);
+            doc.addEventListener('click', click, true);
+            //Mousetrap.bindEventsTo(doc);
+            doc.rwEventsAdded73212312 = uniq;
+        } else if (doc.rwEventsAdded73212312 !== uniq) {
+            // Conflict: Another script of the same type is running
+            // Do not make further calls.
+            return;
+        }
+
+        iframes = doc.getElementsByTagName('iframe');
+        for (i = 0; i < iframes.length; i++) {
+            //prevent 'Unsafe Javascript cross domain' warning http://stackoverflow.com/questions/11569723/chrome-extension-unsafe-javascript-attempt-to-access-frame-with-url-domains-pr/11570012#11570012
+            if (iframes[i].src.indexOf(location.protocol + '//' + location.host) === 0 ||
+                iframes[i].src.indexOf('about:blank') === 0 || iframes[i].src === '') {
+
+                contentDocument = iframes[i].contentDocument;
+                if (iframes[i].id == 'canvas_frame' && contentDocument && !contentDocument.rwEventsAdded73212312) {
+                    // add poller to the new iframe
+                    checkForNewIframe(iframes[i].contentDocument);
+                }
+            }
+        }
+    } catch (e) {
+        //Error: Possibly a frame from another domain?
+        log('[ERROR] checkForNewIframe: ' + e);
+    }
+    checkForNewIframe();
+})(document, 1 + Math.random()); // Initiate recursive function for the document.
 
 function processAriaLabel(t) {
     //returns own, or parent's or grand-parent's or empty aria-label  
@@ -77,7 +119,7 @@ function fillGMailShortcuts() {
 
 
 //Code that runs on start
-log("Hello startup" +document.url);
+log("Hello startup gmail");
 clickTargetProcessors.push(processText);
 clickTargetProcessors.push(processAriaLabel);
 fillGMailShortcuts();
