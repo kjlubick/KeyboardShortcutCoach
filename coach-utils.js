@@ -20,6 +20,7 @@ var debug = true; // is this a debug run?
 var clickTargetProcessors = [];
 var shortcuts = [];
 var currentNotifications = [];
+var debugLogger;
 
 function log(s) { //write to console if in debug
     if (debug) {
@@ -41,20 +42,20 @@ function notify(message, type, timeout) {
     // default values
     var markup, notification, notificationSpan, notificationClose;
     message = typeof message !== 'undefined' ? message : 'Hello!';
-    type = typeof type !== 'undefined' ? type : 'success';
+    type = typeof type !== 'undefined' ? type : 'ksc_success';
     timeout = typeof timeout !== 'undefined' ? timeout : 3000;
 
     // append markup if it doesn't already exist
-    if ($('#notification').length < 1) {
-        markup = '<div id="notification" class="' + type + '"><div class="kr_main">Hello!</div><div class="kr_sidemenu"><a class="close" href="#"></a></div></div>';
+    if ($('#ksc_notification').length < 1) {
+        markup = '<div id="ksc_notification" class="' + type + '"><div class="ksc_main"></div><div class="ksc_sidemenu"><a class="ksc_close" href="#"></a></div></div>';
 
         $('body').append(markup);
     }
 
     // elements
-    notification = $('#notification');
-    notificationSpan = $('#notification div.kr_main');
-    notificationClose = $('#notification a.close');
+    notification = $('#ksc_notification');
+    notificationSpan = notification.find('div.ksc_main');
+    notificationClose = notification.find('a.ksc_close');
 
     // set the message
     notificationSpan.html(message);
@@ -85,13 +86,14 @@ function createShortcut(gE, s, m) {
     // press these shortcuts
     result.shortcuts = s; // for example ['g','i']
     // to achieve this
-    result.message = m; // 
+    result.message = m;
     log('Creating Shortcut');
     log('Gui Elements:' + result.guiElements);
-    log('Shortcuts:' + result.shortcuts.join(' then '));
+    log('Shortcuts:' + result.shortcuts.join(' or '));
     log('Message:' + result.message);
-    return result;
+	shortcuts.push(result);
 }
+
 
 function notify_missed_shortcut(s) {
     var text, shortcutLabels, i, n;
@@ -112,21 +114,18 @@ function notify_missed_shortcut(s) {
 }
 
 function click(e) {
-    // http://stackoverflow.com/questions/9424550/how-can-i-detect-keyboard-events-in-gmail
-
     var t = $(e.target);
 
     //before the target is passed on, it is pre procesed through
     //the array of functions in clickTargetProcessors
     //this creates t.processedAriaLabel and t.processedText
-    $.each(clickTargetProcessors, function (i, f) { f(t); });
+    $.each(clickTargetProcessors, function (i, preprocess) {
+        preprocess(t);
+    });
 
-    log('Click t (Target):');
-    log(t);
-    log('t.processedText `' + t.processedText + '`');
-    log('t.text `' + t.text() + '`');
-    log('t.processedAriaLabel `' + t.processedAriaLabel + '`');
-    log('t.attr("title") `' + t.attr('title') + '`');
+    if (debug && debugLogger) {
+        debugLogger(t);
+    }
     //iterate through all conditions
     $.each(shortcuts, function (i, s) {
         var result = eval(s.guiElements);
@@ -138,4 +137,47 @@ function click(e) {
         }
     });
 }
+
+// http://stackoverflow.com/questions/9424550/how-can-i-detect-keyboard-events-in-gmail
+//This is needed for every app, not just gmail
+(function checkForNewIframe(doc, uniq) {
+    var iframes, i, contentDocument;
+    log("Checking for new IFrame (" + doc + "," + uniq + ")");
+    try {
+        if (!doc) {
+            return; // document does not exist. 
+        }
+
+        // Unique variable to make sure that we're not binding multiple times
+        if (!doc.rwEventsAdded73212312) {
+            //doc.addEventListener('keydown', keyDown, true);
+            //doc.addEventListener('keydown', keyUp, true);
+            doc.addEventListener('click', click, true);
+            //Mousetrap.bindEventsTo(doc);
+            doc.rwEventsAdded73212312 = uniq;
+        } else if (doc.rwEventsAdded73212312 !== uniq) {
+            // Conflict: Another script of the same type is running
+            // Do not make further calls.
+            return;
+        }
+
+        iframes = doc.getElementsByTagName('iframe');
+        for (i = 0; i < iframes.length; i++) {
+            //prevent 'Unsafe Javascript cross domain' warning http://stackoverflow.com/questions/11569723/chrome-extension-unsafe-javascript-attempt-to-access-frame-with-url-domains-pr/11570012#11570012
+            if (iframes[i].src.indexOf(location.protocol + '//' + location.host) === 0 ||
+                iframes[i].src.indexOf('about:blank') === 0 || iframes[i].src === '') {
+
+                contentDocument = iframes[i].contentDocument;
+                if (iframes[i].id == 'canvas_frame' && contentDocument && !contentDocument.rwEventsAdded73212312) {
+                    // add poller to the new iframe
+                    checkForNewIframe(iframes[i].contentDocument);
+                }
+            }
+        }
+    } catch (e) {
+        //Error: Possibly a frame from another domain?
+        log('[ERROR] checkForNewIframe: ' + e);
+    }
+    checkForNewIframe();
+})(document, 1 + Math.random()); // Initiate recursive function for the document.
 
