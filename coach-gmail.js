@@ -1,4 +1,4 @@
-﻿/*global log, createShortcut, clickTargetProcessors, debugLogger*/
+﻿/*global log, createShortcut, clickTargetProcessors, processAriaLabel, debugLogger*/
 /*
 The MIT License (MIT)
 
@@ -16,27 +16,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
 IN THE SOFTWARE.
 */
 
-//gmail looks at processAriaLabel
-function processAriaLabel(t) {
-    //returns own, or parent's or grand-parent's or empty aria-label  
-    var al = t.attr('aria-label');
-    if (typeof al === "undefined") {
-        al = t.parent().attr('aria-label');
-        if (typeof al === "undefined") {
-            al = t.parent().parent().attr('aria-label');
-            if (typeof al === "undefined") { al = ''; }
-        }
-    }
-    t.processedAriaLabel = al;
-    log(al);
-}
-function processText(t) {
+function processTextRemovingWhitespaceAndInboxyStuff(t) {
     // remove E-Mail Count strips _(4) from 'Inbox (4)' and (45)_ from '(45) Inbox' in right-to-left languages
     // zero or 1 whitespace, any digits in brackets and zero or one whitespace
     var text = t.text().replace(/\W?\([\d]*\)\W?/g, "");
     t.processedText = text;
 }
-
 
 function fillGMailShortcuts() {
     createShortcut('t.processedText == "COMPOSE"', ['c'], 'to <u>C</u>ompose a message.');
@@ -79,7 +64,7 @@ function fillGMailShortcuts() {
 
 //Code that runs on start
 log("Hello startup gmail");
-clickTargetProcessors.push(processText);
+clickTargetProcessors.push(processTextRemovingWhitespaceAndInboxyStuff);
 clickTargetProcessors.push(processAriaLabel);
 fillGMailShortcuts();
 
