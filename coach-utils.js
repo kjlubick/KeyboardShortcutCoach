@@ -28,6 +28,13 @@ function log(s) { //write to console if in debug
     }
     return true;
 }
+function logf(s) { //write exactly to the console if in debug (useful for objects)
+    if (debug) {
+        console.log(s);
+    }
+    return true;
+}
+
 function e(s) {     //a simple function to return an empty string if object is undefined or not a string
     if (typeof s != "string") {
         s = '';
