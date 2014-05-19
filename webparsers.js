@@ -1,3 +1,5 @@
+/*exported processAriaLabel */
+
 /*
 The MIT License (MIT)
 
@@ -26,10 +28,4 @@ function processAriaLabel(t) {
         }
     }
     t.processedAriaLabel = al;
-}
-function processText(t) {
-    // remove E-Mail Count strips _(4) from 'Inbox (4)' and (45)_ from '(45) Inbox' in right-to-left languages
-    // zero or 1 whitespace, any digits in brackets and zero or one whitespace
-    var text = t.text().replace(/\W?\([\d]*\)\W?/g, "");
-    t.processedText = text;
 }

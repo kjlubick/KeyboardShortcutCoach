@@ -1,4 +1,4 @@
-/*global log, logf, shortcuts, createShortcut, debugLogger*/
+/*global log, logf, createShortcut, setDebugLogger*/
 /*
 The MIT License (MIT)
 
@@ -15,7 +15,6 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 IN THE SOFTWARE.
 */
-
 function fillGitHubShortcuts() {
     createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively');
     createShortcut('t.attr("href") == "/notifications"', ['g n'], 'to view notifications');
@@ -23,13 +22,11 @@ function fillGitHubShortcuts() {
 }
 
 
-
-
 //Code that runs on start
 log("Hello startup github");
 fillGitHubShortcuts();
 
-debugLogger = function (clickTarget) {
+setDebugLogger(function (clickTarget) {
     log('Click t (Target):');
     logf(clickTarget);
     log('t.text `' + clickTarget.text() + '`');
@@ -37,4 +34,4 @@ debugLogger = function (clickTarget) {
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
     log('t.attr("id") `' + clickTarget.attr('id') + '`');
     log('t.attr("name") `' + clickTarget.attr('name') + '`');
-};
+});
