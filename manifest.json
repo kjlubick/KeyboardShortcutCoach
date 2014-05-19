@@ -1,13 +1,13 @@
 {
    "content_scripts": [ {
       "css": [ "css/notification.css" ],
-      "js": [ "js/jquery-1.7.2.min.js","coach-utils.js", "coach-gmail.js" ],
+      "js": [ "js/jquery-1.7.2.min.js","coach-utils.js", "webparsers.js", "coach-gmail.js" ],
       "matches": [ "*://mail.google.com/*"],
       "run_at": "document_end"
    },
    {
       "css": [ "css/notification.css" ],
-      "js": [ "js/jquery-1.7.2.min.js","coach-utils.js", "coach-github.js" ],
+      "js": [ "js/jquery-1.7.2.min.js","coach-utils.js", "webparsers.js", "coach-github.js" ],
       "matches": [ "*://github.com/*"],
       "run_at": "document_end"
    }
