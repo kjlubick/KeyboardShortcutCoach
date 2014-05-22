@@ -1,4 +1,5 @@
-﻿/*
+﻿/*exported logf, setDebugLogger*/
+/*
 The MIT License (MIT)
 
 Copyright (c) 2014 Kevin Lubick
@@ -127,6 +128,9 @@ function notify_missed_shortcut(s) {
 
 function click(e) {
     var t = $(e.target);
+
+    t.x = e.x;
+    t.y = e.y;
 
     //before the target is passed on, it is pre procesed through
     //the array of functions in clickTargetProcessors

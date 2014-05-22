@@ -1,4 +1,4 @@
-/*global log, logf, createShortcut, setDebugLogger*/
+/*global log, logf, clickTargetProcessors, processAriaLabel, createShortcut, setDebugLogger*/
 /*
 The MIT License (MIT)
 
@@ -17,13 +17,14 @@ IN THE SOFTWARE.
 */
 function fillGitHubShortcuts() {
     createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively');
-    createShortcut('t.attr("href") == "/notifications"', ['g n'], 'to view notifications');
+    createShortcut('t.data("hotkey") == "g n" && t.x !=0', ['g n'], 'to view notifications');  // we check the x here because the actual shortcut clicks this link
     
 }
 
 
 //Code that runs on start
 log("Hello startup github");
+clickTargetProcessors.push(processAriaLabel);
 fillGitHubShortcuts();
 
 setDebugLogger(function (clickTarget) {
@@ -34,4 +35,5 @@ setDebugLogger(function (clickTarget) {
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
     log('t.attr("id") `' + clickTarget.attr('id') + '`');
     log('t.attr("name") `' + clickTarget.attr('name') + '`');
+    log('t.attr("hotkey") `' + clickTarget.data("hotkey") + '`');
 });
