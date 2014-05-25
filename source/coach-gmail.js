@@ -1,4 +1,4 @@
-﻿/*global log, createShortcut, clickTargetProcessors, processAriaLabel, setDebugLogger*/
+﻿/*global log, logf, createShortcut, clickTargetProcessors, processAriaLabel, setDebugLogger*/
 /*
 The MIT License (MIT)
 
@@ -70,9 +70,10 @@ fillGMailShortcuts();
 
 setDebugLogger(function (clickTarget) {
     log('Click t (Target):');
-    log(clickTarget);
+    logf(clickTarget);
     log('t.processedText `' + clickTarget.processedText + '`');
     log('t.text `' + clickTarget.text() + '`');
     log('t.processedAriaLabel `' + clickTarget.processedAriaLabel + '`');
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
+    log('t.className `' +clickTarget.className+'`');
 });
