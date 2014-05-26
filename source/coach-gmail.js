@@ -1,4 +1,4 @@
-﻿/*global log, logf, createShortcut, clickTargetProcessors, processAriaLabel, setDebugLogger*/
+﻿/*global log, logf, createShortcut, clickTargetProcessors, processAriaLabel, processClasses, setDebugLogger*/
 /*
 The MIT License (MIT)
 
@@ -38,8 +38,8 @@ function fillGMailShortcuts() {
     createShortcut('t.processedText == "Starred" && (!t.is("a") && !t.find("a").length)', ['* s'], 'to Select starred conversations');
     createShortcut('t.processedText == "Unstarred"', ['* t'], 'to Select unstarred conversations');
     createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Back to ")', ['u'], 'to return to conversation list');
-    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Newer")', ['k'], 'for "Newer conversation"');
-    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Older")', ['j'], 'for "Older conversation"');
+    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Newer") && -1 == t.classes.indexOf("amI")', ['k'], 'for "Newer conversation"'); //as of 5/25/14, the left arrow for inbox page navigation has the class amI
+    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Older") && -1 == t.classes.indexOf("amJ")', ['j'], 'for "Older conversation"');  //as of 5/25/14, the left arrow for inbox page navigation has the class amJ
     createShortcut('t.processedText == "" && t.attr("name") == "q"', ['/'], 'to Search email');
     createShortcut('t.processedText == "" && t.attr("label") == "Search people..."', ['q'], 'to search chat contacts.');
     createShortcut('t.processedText == "" && t.parent().attr("role")=="checkbox" && -1==t.processedAriaLabel.indexOf("tar")', ['x'], 'to (un)select conversation');
@@ -66,6 +66,7 @@ function fillGMailShortcuts() {
 log("Hello startup gmail");
 clickTargetProcessors.push(processTextRemovingWhitespaceAndInboxyStuff);
 clickTargetProcessors.push(processAriaLabel);
+clickTargetProcessors.push(processClasses);
 fillGMailShortcuts();
 
 setDebugLogger(function (clickTarget) {
@@ -75,5 +76,5 @@ setDebugLogger(function (clickTarget) {
     log('t.text `' + clickTarget.text() + '`');
     log('t.processedAriaLabel `' + clickTarget.processedAriaLabel + '`');
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
-    log('t.className `' +clickTarget.className+'`');
+    log('t.classes `' +clickTarget.classes+'`');
 });

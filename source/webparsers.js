@@ -1,4 +1,4 @@
-/*exported processAriaLabel */
+/*exported processAriaLabel, processClasses */
 
 /*
 The MIT License (MIT)
@@ -28,4 +28,9 @@ function processAriaLabel(t) {
         }
     }
     t.processedAriaLabel = al;
+}
+
+function processClasses(t) {
+    t.classes = t.attr("class");
+
 }

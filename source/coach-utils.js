@@ -1,4 +1,4 @@
-﻿/*exported logf, setDebugLogger*/
+﻿/*exported logf, setDebugLogger, createShortcut*/
 /*
 The MIT License (MIT)
 
@@ -20,7 +20,6 @@ var timeout = 3000; // default timeout for notifications
 var debug = true; // is this a debug run?
 var clickTargetProcessors = [];
 var shortcuts = [];
-var currentNotifications = [];
 var debugLogger;
 
 function log(s) { //write to console if in debug
