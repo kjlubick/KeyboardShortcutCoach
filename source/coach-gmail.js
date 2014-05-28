@@ -50,15 +50,16 @@ function fillGMailShortcuts() {
     createShortcut('t.processedAriaLabel == "Reply" || t.processedText == "Reply"', ['r'], 'to Reply');
     createShortcut('t.processedAriaLabel == "Reply to all" || t.processedText == "Reply to all"', ['a'], 'to Reply all');
     createShortcut('t.processedText == "Forward"', ['f'], 'to Forward the email');
-    createShortcut('t.processedText == "Update conversation"', ['<Shift> + n'], 'to Update conversation');
+    createShortcut('t.processedText == "Update conversation"', ['<Shift>+n'], 'to Update conversation');
     createShortcut('t.processedText == "Send"', ['(Tab) Enter'], 'to Send mail');
     createShortcut('t.processedText == "Undo"', ['z'], 'to Undo last action');
-    createShortcut('t.processedText == "Mark as read"', ['(Shift) + i'], 'to Mark as read');
-    createShortcut('t.processedText == "Mark as unread"', ['(Shift) + u'], 'to Mark as unread');
+    createShortcut('t.processedText == "Mark as read"', ['(Shift)+i'], 'to Mark as read');
+    createShortcut('t.processedText == "Mark as unread"', ['(Shift)+u'], 'to Mark as unread');
     createShortcut('t.processedText == "Mark unread from here"', ['_'], 'to Mark unread from the selected message');
     createShortcut('t.processedAriaLabel == "Not important"', ['+', '='], 'to Mark as important');
     createShortcut('-1 != t.processedAriaLabel.indexOf("Important mainly because")', ['-'], 'to Mark as not important');
     createShortcut('t.processedText == "Call phone"', ['g p'], 'to Make a phone call');
+    createShortcut('t.classes.indexOf("J-Ke") != -1 && t.attr("href") && t.attr("href").indexOf("#label") != -1', ['g l'], 'to start searching by <u>L</u>abel');
 }
 
 
@@ -76,5 +77,6 @@ setDebugLogger(function (clickTarget) {
     log('t.text `' + clickTarget.text() + '`');
     log('t.processedAriaLabel `' + clickTarget.processedAriaLabel + '`');
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
+    log('t.attr("href") `' +  clickTarget.attr("href") +"`");
     log('t.classes `' +clickTarget.classes+'`');
 });
