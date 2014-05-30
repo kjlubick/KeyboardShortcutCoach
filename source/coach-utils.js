@@ -39,13 +39,6 @@ function setDebugLogger(loggerFunction) {
     debugLogger = loggerFunction;
 }
 
-
-function e(s) {     //a simple function to return an empty string if object is undefined or not a string
-    if (typeof s != "string") {
-        s = '';
-    }
-    return s;
-}
 function closePopUp(p) {
     p.fadeOut('slow');
 }
