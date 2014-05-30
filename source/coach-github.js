@@ -21,6 +21,7 @@ function fillGitHubShortcuts() {
     createShortcut('t.processedAriaLabel == "Code"', ['g c'], 'to visit the project screen, aka, the <u>c</u>ode screen');
     createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to visit the <u>i</u>ssue tracker');
     createShortcut('t.text() == "New Issue"', ['c'], 'to <u>c</u>reate an issue');
+    createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags');
 }
 
 
