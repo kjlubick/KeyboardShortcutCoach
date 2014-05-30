@@ -18,7 +18,9 @@ IN THE SOFTWARE.
 function fillGitHubShortcuts() {
     createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively');
     createShortcut('t.data("hotkey") == "g n" && t.x !=0', ['g n'], 'to view notifications');  // we check the x here because the actual shortcut clicks this link
-    
+    createShortcut('t.processedAriaLabel == "Code"', ['g c'], 'to visit the project screen, aka, the <u>c</u>ode screen');
+    createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to visit the <u>i</u>ssue tracker');
+    createShortcut('t.text() == "New Issue"', ['c'], 'to <u>c</u>reate an issue');
 }
 
 
@@ -30,7 +32,7 @@ fillGitHubShortcuts();
 setDebugLogger(function (clickTarget) {
     log('Click t (Target):');
     logf(clickTarget);
-    log('t.text `' + clickTarget.text() + '`');
+    log('t.text() `' + clickTarget.text() + '`');
     log('t.processedAriaLabel `' + clickTarget.processedAriaLabel + '`');
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
     log('t.attr("id") `' + clickTarget.attr('id') + '`');
