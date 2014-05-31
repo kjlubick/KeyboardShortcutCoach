@@ -22,7 +22,10 @@
    },
    "manifest_version": 2,
    "name": "Keyboard Shortcut Coach",
-   "permissions": [ "*://mail.google.com/*", "*://github.com/*" ],
+   "permissions": [ "*://mail.google.com/*", "*://github.com/*",
+
+      "storage"
+    ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "0.1",
    "web_accessible_resources": [ "images/close_information.png" ]

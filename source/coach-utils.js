@@ -1,4 +1,5 @@
-﻿/*exported logf, setDebugLogger, createShortcut*/
+﻿/*global chrome */
+/*exported logf, setDebugLogger, createShortcut*/
 /*
 The MIT License (MIT)
 
@@ -42,13 +43,28 @@ function setDebugLogger(loggerFunction) {
 function closePopUp(p) {
     p.fadeOut('slow');
 }
+
+function clearOutLocalStorage() {
+    log("Clearing out");
+    chrome.storage.local.remove("currentNotification");
+}
+
 function notify(message, type, timeout) {
     //http://notify.dconnell.co.uk/
     // default values
-    var markup, notification, notificationSpan, notificationClose;
+    var markup, notification, notificationSpan, notificationClose, savedNotification;
     message = typeof message !== 'undefined' ? message : '[blank message]';
     type = typeof type !== 'undefined' ? type : 'ksc_success';
     timeout = typeof timeout !== 'undefined' ? timeout : 3000;
+
+
+    savedNotification = {"message":message, "type":type, "timeout":timeout};
+
+    chrome.storage.local.set({"currentNotification":savedNotification},
+        function() {
+            log("finished... error");
+            log(chrome.runtime.lastError);
+        });
 
     // append markup if it doesn't already exist
     if ($('#ksc_notification').length < 1) {
@@ -70,6 +86,7 @@ function notify(message, type, timeout) {
         e.preventDefault();
         notification.stop();
         closePopUp(notification);
+        clearOutLocalStorage();
     });
 
     // for ie6, scroll to the top first
@@ -77,12 +94,27 @@ function notify(message, type, timeout) {
         $('html').scrollTop(0);
     }
 
+    console.log(new Date() + " notification made");
     // hide old notification, then show the new notification
     notification.stop().removeClass().addClass(type).fadeIn('fast', function () {
+        setTimeout(clearOutLocalStorage, timeout);
         notification.delay(timeout);
         closePopUp(notification);
+        
     });
 }
+
+//check if we have a notification from the other page
+chrome.storage.local.get("currentNotification", function(item){
+    log("currentNotifications");
+    item = item.currentNotification;
+    logf(item);
+    if (item !== undefined && item.message !== undefined) {
+        log("Additional Notification");
+        notify(item.message, item.type, item.timeout);
+        clearOutLocalStorage();
+    }
+});
 
 function createShortcut(gE, s, m) {
     var result = {};
