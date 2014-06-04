@@ -17,17 +17,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
 IN THE SOFTWARE.
 */
 
-function processAriaLabel(t) {
+function processAriaLabel(target) {
     //returns own, or parent's or grand-parent's or empty aria-label  
-    var al = t.attr('aria-label');
-    if (typeof al === "undefined") {
-        al = t.parent().attr('aria-label');
-        if (typeof al === "undefined") {
-            al = t.parent().parent().attr('aria-label');
-            if (typeof al === "undefined") { al = ''; }
+    var i, t = target, al = target.attr('aria-label');
+
+    for(i = 0;i<5 && (typeof al === "undefined");i++)
+    {
+        t = t.parent();
+        //break if we have reached the top of the document
+        if (t.length === 0) {
+            al = '';
+            break;
         }
+        al = t.attr('aria-label');
     }
-    t.processedAriaLabel = al;
+
+   target.processedAriaLabel = (typeof al === "undefined" ? ' ' : al);
 }
 
 function processClasses(t) {
