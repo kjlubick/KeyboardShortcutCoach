@@ -1,4 +1,5 @@
-/*global log, logf, clickTargetProcessors, processAriaLabel, createShortcut, setDebugLogger*/
+/*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
+trimText, processAriaLabel*/
 /*
 The MIT License (MIT)
 
@@ -20,7 +21,7 @@ function fillGitHubShortcuts() {
     createShortcut('t.data("hotkey") == "g n" && t.x !=0', ['g n'], 'to view notifications');  // we check the x here because the actual shortcut clicks this link
     createShortcut('t.processedAriaLabel == "Code" && t.x !=0', ['g c'], 'to visit the project screen, aka, the <u>c</u>ode screen');
     createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to visit the <u>i</u>ssue tracker');
-    createShortcut('t.text() == "New Issue"', ['c'], 'to <u>c</u>reate an issue');
+    createShortcut('(t.trimmedText == "New issue" || t.trimmedText == "New Issue") && t.x !=0', ['c'], 'to <u>c</u>reate an issue');
     createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags');
 }
 
@@ -28,6 +29,7 @@ function fillGitHubShortcuts() {
 //Code that runs on start
 log("Hello startup github");
 clickTargetProcessors.push(processAriaLabel);
+clickTargetProcessors.push(trimText);
 fillGitHubShortcuts();
 
 setDebugLogger(function (clickTarget) {

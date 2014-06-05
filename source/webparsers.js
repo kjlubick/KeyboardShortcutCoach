@@ -1,4 +1,4 @@
-/*exported processAriaLabel, processClasses */
+/*exported processAriaLabel, processClasses, trimText */
 
 /*
 The MIT License (MIT)
@@ -21,7 +21,7 @@ function processAriaLabel(target) {
     //returns own, or parent's or grand-parent's or empty aria-label  
     var i, t = target, al = target.attr('aria-label');
 
-    for(i = 0;i<5 && (typeof al === "undefined");i++)
+    for(i = 0;i <5 && (typeof al === "undefined");i++)
     {
         t = t.parent();
         //break if we have reached the top of the document
@@ -37,5 +37,8 @@ function processAriaLabel(target) {
 
 function processClasses(t) {
     t.classes = t.attr("class");
+}
 
+function trimText(t) {
+    t.trimmedText = t.text().trim();
 }
