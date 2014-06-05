@@ -1,4 +1,4 @@
-/*exported processAriaLabel, processClasses, trimText */
+/*exported processAriaLabel, processClasses, trimText, processTitle */
 
 /*
 The MIT License (MIT)
@@ -32,11 +32,29 @@ function processAriaLabel(target) {
         al = t.attr('aria-label');
     }
 
-   target.processedAriaLabel = (typeof al === "undefined" ? ' ' : al);
+   target.processedAriaLabel = (typeof al === "undefined" ? '' : al);
 }
 
 function processClasses(t) {
     t.classes = t.attr("class");
+}
+
+function processTitle(target) {
+     //returns own, or parent's or grand-parent's or empty aria-label  
+    var i, t = target, title = target.attr('title');
+
+    for(i = 0;i <5 && (typeof title === "undefined"); i++)
+    {
+        t = t.parent();
+        //break if we have reached the top of the document
+        if (t.length === 0) {
+            title = '';
+            break;
+        }
+        title = t.attr('title');
+    }
+
+   target.processedTitle = (typeof title === "undefined" ? '' : title);
 }
 
 function trimText(t) {

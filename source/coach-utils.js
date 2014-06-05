@@ -124,10 +124,10 @@ function createShortcut(gE, s, m) {
     result.shortcuts = s; // for example ['g','i']
     // to achieve this
     result.message = m;
-    log('Creating Shortcut');
-    log('Gui Elements:' + result.guiElements);
-    log('Shortcuts:' + result.shortcuts.join(' or '));
-    log('Message:' + result.message);
+    //log('Creating Shortcut');
+    //log('Gui Elements:' + result.guiElements);
+    //log('Shortcuts:' + result.shortcuts.join(' or '));
+    //log('Message:' + result.message);
 	shortcuts.push(result);
 }
 

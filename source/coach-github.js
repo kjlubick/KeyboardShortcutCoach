@@ -1,5 +1,5 @@
 /*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
-trimText, processAriaLabel*/
+trimText, processAriaLabel, processTitle*/
 /*
 The MIT License (MIT)
 
@@ -23,6 +23,7 @@ function fillGitHubShortcuts() {
     createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to visit the <u>i</u>ssue tracker');
     createShortcut('(t.trimmedText == "New issue" || t.trimmedText == "New Issue") && t.x !=0', ['c'], 'to <u>c</u>reate an issue');
     createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags');
+    createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list');
 }
 
 
@@ -30,12 +31,14 @@ function fillGitHubShortcuts() {
 log("Hello startup github");
 clickTargetProcessors.push(processAriaLabel);
 clickTargetProcessors.push(trimText);
+clickTargetProcessors.push(processTitle);
 fillGitHubShortcuts();
 
 setDebugLogger(function (clickTarget) {
     log('Click t (Target):');
     logf(clickTarget);
-    log('t.text() `' + clickTarget.text() + '`');
+    log('t.trimmedText `' + clickTarget.trimmedText + '`');
+    log('t.processedTitle `' + clickTarget.processedTitle + '`');
     log('t.processedAriaLabel `' + clickTarget.processedAriaLabel + '`');
     log('t.attr("title") `' + clickTarget.attr('title') + '`');
     log('t.attr("id") `' + clickTarget.attr('id') + '`');
