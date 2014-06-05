@@ -24,6 +24,7 @@ function fillGitHubShortcuts() {
     createShortcut('(t.trimmedText == "New issue" || t.trimmedText == "New Issue") && t.x !=0', ['c'], 'to <u>c</u>reate an issue');
     createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags');
     createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list');
+    createShortcut('t.processedAriaLabel == "Manage labels"', ['l'], 'to add or remove labels');
 }
 
 
