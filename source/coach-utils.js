@@ -1,4 +1,4 @@
-﻿/*global chrome */
+/*global chrome, Mousetrap */
 /*exported logf, setDebugLogger, createShortcut*/
 /*
 The MIT License (MIT)
@@ -122,14 +122,24 @@ function createShortcut(gE, s, m) {
     result.guiElements = gE;
     // press these shortcuts
     result.shortcuts = s; // for example ['g','i']
+
+    Mousetrap.bind(s[0], function() {
+        console.log("Detected press of " + m);
+    });
+
     // to achieve this
     result.message = m;
     //log('Creating Shortcut');
     //log('Gui Elements:' + result.guiElements);
     //log('Shortcuts:' + result.shortcuts.join(' or '));
     //log('Message:' + result.message);
-	shortcuts.push(result);
+    shortcuts.push(result);
 }
+
+Mousetrap.reset();
+Mousetrap.bind("g a", function() {
+        console.log("Detected press of test");
+    });
 
 
 function notify_missed_shortcut(s) {
