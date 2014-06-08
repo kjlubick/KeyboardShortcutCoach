@@ -1,5 +1,6 @@
 /*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
 trimText, processAriaLabel, processTitle*/
+/*exported bindShortcutKeyPresses */
 /*
 The MIT License (MIT)
 
@@ -25,6 +26,10 @@ function fillGitHubShortcuts() {
     createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags');
     createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list');
     createShortcut('t.processedAriaLabel == "Manage labels"', ['l'], 'to add or remove labels');
+}
+
+function bindShortcutKeyPresses(shortcutArray, toolName) {
+    console.log(shortcutArray, toolName);
 }
 
 

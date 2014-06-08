@@ -9,7 +9,7 @@
    {
       "all_frames": true,
       "css": [ "css/notification.css" ],
-      "js": [ "js/jquery-1.7.2.min.js","js/mousetrap-1.4.6.min.js","coach-utils.js", 
+      "js": [ "js/jquery-1.7.2.min.js","coach-utils.js", 
       "webparsers.js", "coach-github.js" ],
       "matches": [ "*://github.com/*"],
       "run_at": "document_end"
