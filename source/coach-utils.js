@@ -116,7 +116,7 @@ chrome.storage.local.get("currentNotification", function(item){
     }
 });
 
-function createShortcut(gE, s, m, toolName) {
+function createShortcut(gE, s, message, toolName) {
     var result = {};
     //instead of clicking this gui elements
     result.guiElements = gE;
@@ -125,13 +125,10 @@ function createShortcut(gE, s, m, toolName) {
 
     if (bindShortcutKeyPresses) {
         bindShortcutKeyPresses(s, toolName);
-    }
-    
-
-    
+    }  
 
     // to achieve this
-    result.message = m;
+    result.message = message;
     //log('Creating Shortcut');
     //log('Gui Elements:' + result.guiElements);
     //log('Shortcuts:' + result.shortcuts.join(' or '));
