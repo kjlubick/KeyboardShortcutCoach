@@ -18,14 +18,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
 IN THE SOFTWARE.
 */
 function fillGitHubShortcuts() {
-    createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively');
-    createShortcut('t.data("hotkey") == "g n" && t.x !=0', ['g n'], 'to view notifications');  // we check the x here because the actual shortcut clicks this link
-    createShortcut('t.processedAriaLabel == "Code" && t.x !=0', ['g c'], 'to visit the project screen, aka, the <u>c</u>ode screen');
-    createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to visit the <u>i</u>ssue tracker');
-    createShortcut('(t.trimmedText == "New issue" || t.trimmedText == "New Issue") && t.x !=0', ['c'], 'to <u>c</u>reate an issue');
-    createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags');
-    createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list');
-    createShortcut('t.processedAriaLabel == "Manage labels"', ['l'], 'to add or remove labels');
+    createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively', 'search');
+    createShortcut('t.data("hotkey") == "g n" && t.x !=0', ['g n'], 'to view notifications', 'viewNotifications');  // we check the x here because the actual shortcut clicks this link
+    createShortcut('t.processedAriaLabel == "Code" && t.x !=0', ['g c'], 'to visit the project screen, aka, the <u>c</u>ode screen', 'gotoCodeScreen');
+    createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to visit the <u>i</u>ssue tracker', 'gotoIssues');
+    createShortcut('(t.trimmedText == "New issue" || t.trimmedText == "New Issue") && t.x !=0', ['c'], 'to <u>c</u>reate an issue', 'createIssue');
+    createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags', 'switchBranch');
+    createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list', 'goBackToIssue');
+    createShortcut('t.processedAriaLabel == "Manage labels"', ['l'], 'to add or remove labels', 'manageLabels');
 }
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
