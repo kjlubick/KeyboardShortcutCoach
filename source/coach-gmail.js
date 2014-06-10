@@ -40,11 +40,16 @@ function fillGMailShortcuts() {
     createShortcut('t.processedText == "Starred" && (!t.is("a") && !t.find("a").length)', ['* s'], 'to Select starred conversations', 'selectStarred');
     createShortcut('t.processedText == "Unstarred"', ['* t'], 'to Select unstarred conversations', 'selectUnstarred');
     createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Back to ")', ['u'], 'to return to conversation list', 'returnToList');
-    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Newer") && -1 == t.classes.indexOf("amI")', ['k'], 'for "Newer conversation"', 'newerConvo'); //as of 5/25/14, the left arrow for inbox page navigation has the class amI
-    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Older") && -1 == t.classes.indexOf("amJ")', ['j'], 'for "Older conversation"', 'olderConvo');  //as of 5/25/14, the left arrow for inbox page navigation has the class amJ
+    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Newer") && -1 == t.classes.indexOf("amI")', ['k'], 
+    'for "Newer conversation"', 'newerConvo'); //as of 5/25/14, the left arrow for inbox page navigation has the class amI
+    createShortcut('t.processedText == "" && -1 !=t.processedAriaLabel.indexOf("Older") && -1 == t.classes.indexOf("amJ")', ['j'], 
+    'for "Older conversation"', 'olderConvo');  //as of 5/25/14, the left arrow for inbox page navigation has the class amJ
     createShortcut('t.processedText == "" && t.attr("name") == "q"', ['/'], 'to Search email', 'search');
     createShortcut('t.processedText == "" && t.attr("label") == "Search people..."', ['q'], 'to search chat contacts.', 'searchContacts');
-    createShortcut('t.processedText == "" && t.parent().attr("role")=="checkbox" && -1==t.processedAriaLabel.indexOf("tar")', ['x'], 'to (un)select conversation', 'selectSingleConvo');
+    createShortcut('t.processedText == "" && t.parent().attr("role")=="checkbox" && -1 == t.processedAriaLabel.indexOf("tar")', ['x'], 
+        'to (un)select conversation', 'selectSingleConvo');
+    createShortcut('t.processedText == "" && -1 != t.processedAriaLabel.indexOf("tar")', ['s'], 
+        'to (un)star conversation', 'starConvo');
     createShortcut('t.processedAriaLabel == "Archive"', ['e'], 'to Archive', 'archive');
     createShortcut('t.processedText == "Mute" || t.processedText == "Unmute"', ['m'], 'to Mute/Ignore conversation', 'muteConvo');
     createShortcut('t.processedAriaLabel == "Report spam" || t.processedText == "Report spam"', ['!'], 'to Report as spam', 'reportSpam');
@@ -52,11 +57,11 @@ function fillGMailShortcuts() {
     createShortcut('t.processedAriaLabel == "Reply" || t.processedText == "Reply"', ['r'], 'to Reply', 'reply');
     createShortcut('t.processedAriaLabel == "Reply to all" || t.processedText == "Reply to all"', ['a'], 'to Reply all', 'replyAll');
     createShortcut('t.processedText == "Forward"', ['f'], 'to Forward the email', 'forward');
-    createShortcut('t.processedText == "Update conversation"', ['<Shift>+n'], 'to Update conversation', 'updateConvo');
-    createShortcut('t.processedText == "Send"', ['(Tab) Enter'], 'to Send mail', 'send');
+    createShortcut('t.processedText == "Update conversation"', ['Shift+n'], 'to Update conversation', 'updateConvo');
+    createShortcut('t.processedText == "Send"', ['tab enter'], 'to Send mail', 'send');
     createShortcut('t.processedText == "Undo"', ['z'], 'to Undo last action', 'undo');
-    createShortcut('t.processedText == "Mark as read"', ['(Shift)+i'], 'to Mark as read', 'markAsRead');
-    createShortcut('t.processedText == "Mark as unread"', ['(Shift)+u'], 'to Mark as unread', 'markAsUnread');
+    createShortcut('t.processedText == "Mark as read"', ['shift+i'], 'to Mark as read', 'markAsRead');
+    createShortcut('t.processedText == "Mark as unread"', ['shift+u'], 'to Mark as unread', 'markAsUnread');
     createShortcut('t.processedText == "Mark unread from here"', ['_'], 'to Mark unread from the selected message', 'markCurrentAsUnread');
     createShortcut('t.processedAriaLabel == "Not important"', ['+', '='], 'to Mark as important', 'markImportant');
     createShortcut('-1 != t.processedAriaLabel.indexOf("Important mainly because")', ['-'], 'to Mark as not important', 'markUnimportant');
