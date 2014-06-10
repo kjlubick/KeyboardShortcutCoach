@@ -65,9 +65,13 @@ function fillGMailShortcuts() {
 }
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
-    Mousetrap.bind(shortcutArray[0], function() {
+    var i = 0;
+    for(;i<shortcutArray.length;i++) {
+        Mousetrap.bind(shortcutArray[i], function() {
         console.log("Detected press of " + toolName);
     });
+    }
+    
 }
 
 
