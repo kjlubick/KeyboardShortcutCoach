@@ -34,7 +34,7 @@ function fillGMailShortcuts() {
     createShortcut('t.processedText == "Contacts"', ['g c'], 'to Go to Contacts', 'gotoContacts');
     createShortcut('t.processedText == "Tasks"', ['g k'], 'to Go to Tasks', 'gotoTasks');
     createShortcut('t.processedText == "All"', ['* a'], 'to Select all conversations', 'selectAllConvos');
-    createShortcut('t.processedText == "None"', ['* n'], 'to Deselect all conversations', 'deselcectAllConvos');
+    createShortcut('t.processedText == "None"', ['* n'], 'to Deselect all conversations', 'deselectAllConvos');
     createShortcut('t.processedText == "Read"', ['* r'], 'to Select read conversations', 'selectReadConvos');
     createShortcut('t.processedText == "Unread"', ['* u'], 'to Select unread conversations', 'selectUnreadConvos');
     createShortcut('t.processedText == "Starred" && (!t.is("a") && !t.find("a").length)', ['* s'], 'to Select starred conversations', 'selectStarred');
