@@ -1,5 +1,5 @@
 /*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
-trimText, processAriaLabel, processTitle*/
+trimText, processAriaLabel, processTitle, Mousetrap*/
 /*exported bindShortcutKeyPresses */
 /*
 The MIT License (MIT)
@@ -30,7 +30,15 @@ function fillGitHubShortcuts() {
 }
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
-    console.log(shortcutArray, toolName);
+    console.log(shortcutArray +" "+ toolName);
+    
+    var i = 0;
+    for(;i<shortcutArray.length;i++) {
+        Mousetrap.unbind(shortcutArray[i]);
+        Mousetrap.bind(shortcutArray[i], function() {
+        console.log("Detected press of " + toolName);
+    });
+    }
 }
 
 
