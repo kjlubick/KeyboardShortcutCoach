@@ -1,5 +1,7 @@
 /*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
-trimText, processAriaLabel, processTitle, Mousetrap*/
+trimText, processAriaLabel, processTitle, registerDoubleKey, customKeyBinder, registerSingleKey,
+registerKeybindingCallback*/
+
 /*exported bindShortcutKeyPresses */
 /*
 The MIT License (MIT)
@@ -23,23 +25,36 @@ function fillGitHubShortcuts() {
     createShortcut('t.processedAriaLabel == "Code" && t.x !=0', ['g c'], 'to <u>g</u>o to the project screen, aka, the <u>c</u>ode screen', 'gotoCodeScreen');
     createShortcut('t.processedAriaLabel == "Issues" && t.x !=0 ', ['g i'], 'to <u>g</u>o to the <u>i</u>ssue tracker', 'gotoIssues');
     createShortcut('t.processedAriaLabel == "Wiki" && t.x !=0 ', ['g w'], 'to <u>g</u>o to the <u>W</u>iki', 'gotoWiki');
+    createShortcut('t.processedAriaLabel == "Pull Requests" && t.x !=0 ', ['g p'], 'to <u>g</u>o to the <u>P</u>ull Requests', 'gotoPullRequests');
     createShortcut('(t.trimmedText == "New issue" || t.trimmedText == "New Issue") && t.x !=0', ['c'], 'to <u>c</u>reate an issue', 'createIssue');
     createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags', 'switchBranch');
     createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list', 'goBackToIssue');
     createShortcut('t.processedAriaLabel == "Manage labels"', ['l'], 'to add or remove labels', 'manageLabels');
 }
 
+
+function bindingCallBack(toolName) {
+    log(toolName + " detected!");
+}
+
+
+
+
 function bindShortcutKeyPresses(shortcutArray, toolName) {
     console.log(shortcutArray +" "+ toolName);
     
     var i = 0;
     for(;i<shortcutArray.length;i++) {
-        Mousetrap.unbind(shortcutArray[i]);
-        Mousetrap.bind(shortcutArray[i], function() {
-        console.log("Detected press of " + toolName);
-    });
+        registerSingleKey(shortcutArray[i], toolName);
     }
 }
+
+
+
+registerDoubleKey("g");
+
+registerKeybindingCallback(bindingCallBack);
+$(document).on('keydown', customKeyBinder);
 
 
 //Code that runs on start
