@@ -11,13 +11,25 @@ function registerKeybindingCallback(func) {
 }
 
 function standardShortcutToCustom(standard) {
+    var upper;
+    if (standard.length == 1) {
+        if (standard == "/") {
+            return 191;
+        }
+        return standard.toUpperCase().charCodeAt(0);
+    }
 
-
+    if (standard.length == 3) {
+        upper = standard.toUpperCase();
+        return upper.charCodeAt(0) + "+" + upper.charCodeAt(2);
+    }
 
 }
 
 function registerSingleKey(key, toolName) {
-    keyCodeMap[standardShortcutToCustom(key)] = toolName;
+    var converted = standardShortcutToCustom(key);
+    log(key + "->" + converted);
+    keyCodeMap[converted] = toolName;
 }
 
 //turns a key event into a text representation
@@ -55,7 +67,7 @@ function checkDoubleKeyCombos(parsedKey)
                 return ""+key+"+"+parsedKey;
             }
 
-            if (parsedKey == key.charCodeAt(0)) {
+            if (parsedKey == key) {
                 firstKeyFlags[key] = true;
                 setTimeout(function() {
                     firstKeyFlags[key] = false;
@@ -70,6 +82,7 @@ function checkDoubleKeyCombos(parsedKey)
 
 function customKeyBinder(evt){
     var keypress = parseKey(evt);
+    log(keypress);
 
     keypress = checkDoubleKeyCombos(keypress);
     
@@ -83,5 +96,5 @@ function customKeyBinder(evt){
 }
 
 function registerDoubleKey(firstKey) {
-    firstKeyFlags[firstKey] = false;
+    firstKeyFlags[firstKey.toUpperCase().charCodeAt(0)] = false;
 }
