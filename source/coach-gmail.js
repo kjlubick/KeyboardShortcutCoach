@@ -1,5 +1,5 @@
 ﻿/*global log, logf, createShortcut, clickTargetProcessors, setDebugLogger, Mousetrap,
-processAriaLabel, processClasses*/
+processAriaLabel, processClasses, registerGuiCallback*/
 /*exported bindShortcutKeyPresses  */
 /*
 The MIT License (MIT)
@@ -79,9 +79,13 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
     
 }
 
+function guiCallBack(toolName) {
+    log(toolName + " detected as menu!");
+}
 
 //Code that runs on start
 log("Hello startup gmail");
+registerGuiCallback(guiCallBack);
 clickTargetProcessors.push(processTextRemovingWhitespaceAndInboxyStuff);
 clickTargetProcessors.push(processAriaLabel);
 clickTargetProcessors.push(processClasses);

@@ -1,5 +1,5 @@
 /*global chrome, bindShortcutKeyPresses */
-/*exported logf, setDebugLogger, createShortcut*/
+/*exported logf, setDebugLogger, createShortcut, registerGuiCallback*/
 /*
 The MIT License (MIT)
 
@@ -22,6 +22,7 @@ var debug = true; // is this a debug run?
 var clickTargetProcessors = [];
 var shortcuts = [];
 var debugLogger;
+var guiCallback;
 
 function log(s) { //write to console if in debug
     if (debug) {
@@ -47,6 +48,10 @@ function closePopUp(p) {
 function clearOutLocalStorage() {
     log("Clearing out");
     chrome.storage.local.remove("currentNotification");
+}
+
+function registerGuiCallback(func) {
+    guiCallback = func;
 }
 
 function notify(message, type, timeout) {
@@ -123,6 +128,8 @@ function createShortcut(gE, s, message, toolName) {
     // press these shortcuts
     result.shortcuts = s; // for example ['g','i']
 
+    result.toolName = toolName;
+
     if (bindShortcutKeyPresses) {
         bindShortcutKeyPresses(s, toolName);
     }  
@@ -178,6 +185,9 @@ function click(e) {
         //log(i + ' - Evaling: ' + s.guiElements + ' = ' + result);
         if (result) {
             notify_missed_shortcut(s);
+            if (guiCallback) {
+                guiCallback(s.toolName);
+            }
             return false;
         }
     });

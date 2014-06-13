@@ -1,6 +1,6 @@
 /*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
-trimText, processAriaLabel, processTitle, registerDoubleKey, customKeyBinder, registerSingleKey,
-registerKeybindingCallback*/
+trimText, processAriaLabel, processTitle, registerDoubleKey, registerSingleKey,
+registerKeybindingCallback, registerGuiCallback*/
 
 /*exported bindShortcutKeyPresses */
 /*
@@ -33,11 +33,13 @@ function fillGitHubShortcuts() {
 }
 
 
-function bindingCallBack(toolName) {
-    log(toolName + " detected!");
+function keyBindingCallBack(toolName) {
+    log(toolName + " detected as keypress!");
 }
 
-
+function guiCallBack(toolName) {
+    log(toolName + " detected as menu!");
+}
 
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
@@ -49,12 +51,11 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
     }
 }
 
-
-
 registerDoubleKey("g");
 
-registerKeybindingCallback(bindingCallBack);
-$(document).on('keydown', customKeyBinder);
+registerKeybindingCallback(keyBindingCallBack);
+registerGuiCallback(guiCallBack);
+
 
 
 //Code that runs on start
