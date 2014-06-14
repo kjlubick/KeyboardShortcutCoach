@@ -19,6 +19,10 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 IN THE SOFTWARE.
 */
+
+var keyboardCount = {};
+var guiCount = {};
+
 function fillGitHubShortcuts() {
     createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively', 'search');
     createShortcut('t.data("hotkey") == "g n" && t.x !=0', ['g n'], 'to view notifications', 'viewNotifications');  // we check the x here because the actual shortcut clicks this link
@@ -34,11 +38,22 @@ function fillGitHubShortcuts() {
 
 
 function keyBindingCallBack(toolName) {
-    log(toolName + " detected as keypress!");
+    if (keyboardCount[toolName]) {
+        keyboardCount[toolName] = keyboardCount[toolName] + 1;
+    }
+    else {
+        keyboardCount[toolName] = 1;
+    }
 }
 
 function guiCallBack(toolName) {
-    log(toolName + " detected as menu!");
+    log(toolName + " detected as guiInvocation!");
+    if (guiCount[toolName]) {
+        guiCount[toolName] = guiCount[toolName] + 1;
+    }
+    else {
+        guiCount[toolName] = 1;
+    }
 }
 
 
