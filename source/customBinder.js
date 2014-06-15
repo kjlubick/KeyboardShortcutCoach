@@ -27,20 +27,24 @@ function registerKeybindingCallback(func) {
 }
 
 function standardShortcutToCustom(standard) {
-    var upper;
+    var upper = standard.toUpperCase(), lastCode;
     //single letter commands
     if (standard.length == 1) {
         if (standard == "/") {
             return 191;
         }
-        return standard.toUpperCase().charCodeAt(0);
+        return upper.charCodeAt(0);
     }
     //two letter commands
     if (standard.length == 3) {
-        upper = standard.toUpperCase();
         return upper.charCodeAt(0) + "+" + upper.charCodeAt(2);
     }
-    
+
+    //commands involving shift, alt, ctrl
+    upper = upper.replace("ALT+", "A").replace("CTRL+", "C").replace("SHIFT+", "S");
+
+    lastCode = upper.charCodeAt(upper.length - 1);
+    return upper.substring(0, upper.length - 1 )+lastCode;   
 }
 
 function registerSingleKey(key, toolName) {
