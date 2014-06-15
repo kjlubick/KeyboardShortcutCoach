@@ -34,6 +34,9 @@ function fillGitHubShortcuts() {
     createShortcut('t.processedAriaLabel == "Switch branches or tags"', ['w'], 'to switch brances or tags', 'switchBranch');
     createShortcut('t.processedTitle == "Back to Issue list" && t.x !=0 ', ['u'], 'to go back to issue list', 'goBackToIssue');
     createShortcut('t.processedAriaLabel == "Manage labels"', ['l'], 'to add or remove labels', 'manageLabels');
+    createShortcut('t.processedAriaLabel == "Quickly jump between files"', ['t'], 'to search using the <i>file finder</i>', 'fileSearch');
+    createShortcut('(t.trimmedText == "Write" || t.trimmedText == "Preview")', ['Ctrl+Shift+p'], 'to toggle between a preview and editing markdown', 'toggleMDPreview');
+
 }
 
 
