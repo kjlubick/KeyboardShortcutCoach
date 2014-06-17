@@ -1,5 +1,5 @@
 ﻿/*global log, logf, createShortcut, clickTargetProcessors, setDebugLogger, Mousetrap,
-processAriaLabel, processClasses, registerGuiCallback*/
+processAriaLabel, processClasses, registerGuiCallback, chrome*/
 /*exported bindShortcutKeyPresses  */
 /*
 The MIT License (MIT)
@@ -70,11 +70,17 @@ function fillGMailShortcuts() {
 }
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
-    var i = 0;
+    var i = 0, key;
     for(;i<shortcutArray.length;i++) {
-        Mousetrap.bind(shortcutArray[i], function() {
-        console.log("Detected press of " + toolName);
+        //Mousetrap.bind(shortcutArray[i], function() {
+        //console.log("Detected press of " + toolName);
+        chrome.storage.local.get("key"+toolName, function(item){
+        if (item === undefined) {
+            chrome.storage.local.set({"key"+toolName:3});
+        }
+        
     });
+
     }
     
 }
