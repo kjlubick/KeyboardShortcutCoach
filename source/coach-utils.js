@@ -67,8 +67,8 @@ function notify(message, type, timeout) {
 
     chrome.storage.local.set({"currentNotification":savedNotification},
         function() {
-            log("finished... error");
-            log(chrome.runtime.lastError);
+            log("finished...");
+            logf(chrome.runtime.lastError);
         });
 
     // append markup if it doesn't already exist

@@ -74,9 +74,14 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
     for(;i<shortcutArray.length;i++) {
         //Mousetrap.bind(shortcutArray[i], function() {
         //console.log("Detected press of " + toolName);
-        chrome.storage.local.get("key"+toolName, function(item){
+        key = "key"+toolName;
+        chrome.storage.local.get(key, function(item){
+        log(key +" "+item);
+        logf(item);
         if (item === undefined) {
-            chrome.storage.local.set({"key"+toolName:3});
+            chrome.storage.local.set({key:1});
+        } else {
+            chrome.storage.local.set({key:(1+parseInt(item,10))});
         }
         
     });
@@ -86,7 +91,17 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
 }
 
 function guiCallBack(toolName) {
-    log(toolName + " detected as menu!");
+    var key = "menu" + toolName;
+    chrome.storage.local.get(key, function(item){
+        console.log(key +" "+item);
+        logf(item);
+        if (item === undefined) {
+            chrome.storage.local.set({key:1});
+        } else {
+            chrome.storage.local.set({key:(1+parseInt(item,10))});
+        }
+        
+    });
 }
 
 //Code that runs on start
