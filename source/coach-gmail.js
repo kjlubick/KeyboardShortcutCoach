@@ -70,20 +70,24 @@ function fillGMailShortcuts() {
 }
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
-    var i = 0, key;
+    var i = 0, key, putVal;
     for(;i<shortcutArray.length;i++) {
-        //Mousetrap.bind(shortcutArray[i], function() {
+        Mousetrap.bind(shortcutArray[i], function() {
         //console.log("Detected press of " + toolName);
         key = "key"+toolName;
         chrome.storage.local.get(key, function(item){
-        log(key +" "+item);
-        logf(item);
-        if (item === undefined) {
-            chrome.storage.local.set({key:1});
-        } else {
-            chrome.storage.local.set({key:(1+parseInt(item,10))});
-        }
-        
+            log(key +" "+item);
+            logf(item);
+            putVal = {};
+            if (item[key] === undefined) {
+                putVal[key] = 1;
+                chrome.storage.local.set(putVal);
+            } else {
+                putVal[key] = parseInt(item[key],10) + 1;
+                chrome.storage.local.set(putVal);
+            }
+
+        });
     });
 
     }
@@ -91,17 +95,20 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
 }
 
 function guiCallBack(toolName) {
-    var key = "menu" + toolName;
+    var key = "menu" + toolName,putVal = {};
     chrome.storage.local.get(key, function(item){
-        console.log(key +" "+item);
-        logf(item);
-        if (item === undefined) {
-            chrome.storage.local.set({key:1});
-        } else {
-            chrome.storage.local.set({key:(1+parseInt(item,10))});
-        }
-        
-    });
+            log(key +" "+item);
+            logf(item);
+            putVal = {};
+            if (item[key] === undefined) {
+                putVal[key] = 1;
+                chrome.storage.local.set(putVal);
+            } else {
+                putVal[key] = parseInt(item[key],10) + 1;
+                chrome.storage.local.set(putVal);
+            }
+
+        });
 }
 
 //Code that runs on start
