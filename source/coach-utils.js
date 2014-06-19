@@ -1,4 +1,4 @@
-/*global chrome, bindShortcutKeyPresses */
+/*global chrome, bindShortcutKeyPresses, chrome */
 /*exported logf, setDebugLogger, createShortcut, registerGuiCallback*/
 /*
 The MIT License (MIT)
@@ -194,3 +194,6 @@ function click(e) {
 }
 
 document.addEventListener('click', click, true);
+
+//for debugging and viewing the storage
+//chrome.storage.local.get(null, function (data) { console.log(data); });

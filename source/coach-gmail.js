@@ -70,15 +70,13 @@ function fillGMailShortcuts() {
 }
 
 function bindShortcutKeyPresses(shortcutArray, toolName) {
-    var i = 0, key, putVal;
+    var i = 0, key;
     for(;i<shortcutArray.length;i++) {
         Mousetrap.bind(shortcutArray[i], function() {
         //console.log("Detected press of " + toolName);
         key = "key"+toolName;
         chrome.storage.local.get(key, function(item){
-            log(key +" "+item);
-            logf(item);
-            putVal = {};
+            var putVal = {};
             if (item[key] === undefined) {
                 putVal[key] = 1;
                 chrome.storage.local.set(putVal);
@@ -95,11 +93,9 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
 }
 
 function guiCallBack(toolName) {
-    var key = "menu" + toolName,putVal = {};
+    var key = "menu" + toolName;
     chrome.storage.local.get(key, function(item){
-            log(key +" "+item);
-            logf(item);
-            putVal = {};
+            var putVal = {};
             if (item[key] === undefined) {
                 putVal[key] = 1;
                 chrome.storage.local.set(putVal);

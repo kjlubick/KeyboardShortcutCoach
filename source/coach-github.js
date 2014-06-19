@@ -1,6 +1,6 @@
 /*global log, logf, clickTargetProcessors,  createShortcut, setDebugLogger,
 trimText, processAriaLabel, processTitle, registerDoubleKey, registerSingleKey,
-registerKeybindingCallback, registerGuiCallback*/
+registerKeybindingCallback, registerGuiCallback, chrome*/
 
 /*exported bindShortcutKeyPresses */
 /*
@@ -20,8 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
 IN THE SOFTWARE.
 */
 
-var keyboardCount = {};
-var guiCount = {};
 
 function fillGitHubShortcuts() {
     createShortcut('t.attr("id") == "js-command-bar-field"', ['/', 's'], 'to search current repository or search all of GitHub, respectively', 'search');
@@ -41,22 +39,33 @@ function fillGitHubShortcuts() {
 
 
 function keyBindingCallBack(toolName) {
-    if (keyboardCount[toolName]) {
-        keyboardCount[toolName] = keyboardCount[toolName] + 1;
-    }
-    else {
-        keyboardCount[toolName] = 1;
-    }
+    var key = "key"+toolName;
+        chrome.storage.local.get(key, function(item){
+            var putVal = {};
+            if (item[key] === undefined) {
+                putVal[key] = 1;
+                chrome.storage.local.set(putVal);
+            } else {
+                putVal[key] = parseInt(item[key],10) + 1;
+                chrome.storage.local.set(putVal);
+            }
+
+        });
 }
 
 function guiCallBack(toolName) {
-    log(toolName + " detected as guiInvocation!");
-    if (guiCount[toolName]) {
-        guiCount[toolName] = guiCount[toolName] + 1;
-    }
-    else {
-        guiCount[toolName] = 1;
-    }
+    var key = "menu" + toolName;
+    chrome.storage.local.get(key, function(item){
+        var putVal = {};
+            if (item[key] === undefined) {
+                putVal[key] = 1;
+                chrome.storage.local.set(putVal);
+            } else {
+                putVal[key] = parseInt(item[key],10) + 1;
+                chrome.storage.local.set(putVal);
+            }
+
+        });
 }
 
 
