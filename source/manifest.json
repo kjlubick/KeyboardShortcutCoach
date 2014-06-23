@@ -20,8 +20,8 @@
    ],
 "browser_action": {
       "default_icon": {
-         "16": "whistle-icon16.png",
-         "32": "whistle-icon32.png"
+         "19": "whistle-icon19.png",
+         "38": "whistle-icon38.png"
       },
       "default_popup": "popup.html",
       "default_title": "Some message here"
