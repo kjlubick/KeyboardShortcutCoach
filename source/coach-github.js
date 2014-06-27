@@ -38,34 +38,29 @@ function fillGitHubShortcuts() {
 }
 
 
+function incrementTool(keyName) {
+    // chrome.storage.local.get(keyName, function(item){
+    //     var putVal = {};
+    //     if (item[keyName] === undefined) {
+    //         putVal[keyName] = 1;
+    //         chrome.storage.local.set(putVal);
+    //     } else {
+    //         putVal[keyName] = parseInt(item[keyName],10) + 1;
+    //         chrome.storage.local.set(putVal);
+    //     }
+
+    // });
+    chrome.runtime.sendMessage({greeting: "hello GitHub"+keyName});
+ }
+
 function keyBindingCallBack(toolName) {
     var key = "key"+toolName;
-        chrome.storage.local.get(key, function(item){
-            var putVal = {};
-            if (item[key] === undefined) {
-                putVal[key] = 1;
-                chrome.storage.local.set(putVal);
-            } else {
-                putVal[key] = parseInt(item[key],10) + 1;
-                chrome.storage.local.set(putVal);
-            }
-
-        });
+    incrementTool(key);
 }
 
 function guiCallBack(toolName) {
     var key = "menu" + toolName;
-    chrome.storage.local.get(key, function(item){
-        var putVal = {};
-            if (item[key] === undefined) {
-                putVal[key] = 1;
-                chrome.storage.local.set(putVal);
-            } else {
-                putVal[key] = parseInt(item[key],10) + 1;
-                chrome.storage.local.set(putVal);
-            }
-
-        });
+    incrementTool(key);
 }
 
 
