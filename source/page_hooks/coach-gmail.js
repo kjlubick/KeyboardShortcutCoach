@@ -87,7 +87,6 @@ function bindShortcutKeyPresses(shortcutArray, toolName) {
     var i = 0, key;
     for(;i<shortcutArray.length;i++) {
         Mousetrap.bind(shortcutArray[i], function() {
-        //console.log("Detected press of " + toolName);
         key = "Gmail.key."+toolName;
         incrementTool(key);
     });
