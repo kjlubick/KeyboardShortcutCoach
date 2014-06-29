@@ -2,7 +2,7 @@
    "content_scripts": [ {
       "all_frames": true,
       "css": [ "css/notification.css" ],
-      "js": [ "js/logger.js", "js/jquery-1.7.2.min.js", "js/mousetrap-1.4.6.min.js", "coach-utils.js",
+      "js": [ "js/logger.js", "js/jquery.js", "js/mousetrap-1.4.6.min.js", "coach-utils.js",
        "webparsers.js", "page_hooks/coach-gmail.js" ],
       "matches": [ "*://mail.google.com/*"],
       "run_at": "document_end"
@@ -10,7 +10,7 @@
    {
       "all_frames": true,
       "css": [ "css/notification.css" ],
-      "js": [ "js/logger.js", "js/jquery-1.7.2.min.js", "coach-utils.js", "customBinder.js",
+      "js": [ "js/logger.js", "js/jquery.js", "coach-utils.js", "customBinder.js",
       "webparsers.js", "page_hooks/coach-github.js" ],
       "matches": [ "*://github.com/*"],
       "run_at": "document_end"
