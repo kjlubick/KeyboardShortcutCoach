@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener(
     	chrome.storage.local.get(null, function(item){
     		sendResponse(item);
     	});
+    	return true;
     } else {
     	log("Command not recognized");
     	sendResponse({"error":"Not recognized command"});
