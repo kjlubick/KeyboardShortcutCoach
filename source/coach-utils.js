@@ -1,4 +1,4 @@
-/*global chrome, bindShortcutKeyPresses, chrome, log, logf */
+/*global chrome, bindShortcutKeyPresses, chrome, log, logf, debug */
 /*exported logf, setDebugLogger, createShortcut, registerGuiCallback*/
 /*
 The MIT License (MIT)
@@ -49,7 +49,9 @@ function notify(message, type, timeout) {
     timeout = typeof timeout !== 'undefined' ? timeout : 3000;
 
 
-    savedNotification = {"message":message, "type":type, "timeout":timeout};
+    savedNotification = {"message":message, "type":type, "timeout":timeout,
+    "date":new Date().getTime()};
+
 
     chrome.storage.local.set({"currentNotification":savedNotification},
         function() {
@@ -81,7 +83,7 @@ function notify(message, type, timeout) {
     });
 
     // for ie6, scroll to the top first
-    if ($.browser.msie && $.browser.version < 7) {
+    if ($.browser && $.browser.msie && $.browser.version < 7) {
         $('html').scrollTop(0);
     }
 
@@ -97,13 +99,16 @@ function notify(message, type, timeout) {
 
 //check if we have a notification from the other page
 chrome.storage.local.get("currentNotification", function(item){
-    log("currentNotifications");
+    //log("currentNotifications");
     item = item.currentNotification;
-    logf(item);
+    //logf(item);
     if (item !== undefined && item.message !== undefined) {
-        log("Additional Notification");
-        notify(item.message, item.type, item.timeout);
+        //log("Additional Notification");
         clearOutLocalStorage();
+        if (item.date && (new Date().getTime() - item.date < 5000) ) {
+            notify(item.message, item.type, item.timeout);
+        }
+        
     }
 });
 
