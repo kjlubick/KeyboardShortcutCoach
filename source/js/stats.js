@@ -1,4 +1,4 @@
-/*global chrome, Highcharts*/
+﻿/*global chrome, Highcharts*/
 
 var sampleData = [['Website visits', 15654],['Downloads', 4064],['Requested price list', 1987],['Invoice sent', 976],['Finalized', 846]];
 //var sampleData = [{"createIssue": 30}, {"goBackToIssue": 20}, {"issue": 15}, {"other": 12}];
