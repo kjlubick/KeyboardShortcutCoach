@@ -87,7 +87,6 @@ function notify(message, type, timeout) {
         $('html').scrollTop(0);
     }
 
-    console.log(new Date() + " notification made");
     // hide old notification, then show the new notification
     notification.stop().removeClass().addClass(type).fadeIn('fast', function () {
         setTimeout(clearOutLocalStorage, timeout);
