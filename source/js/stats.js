@@ -1,6 +1,6 @@
 ﻿/*global chrome, Highcharts*/
 
-var sampleData = [['Website visits', 15654],['Downloads', 4064],['Requested price list', 1987],['Invoice sent', 976],['Finalized', 846]];
+var sampleData = [['Downloads', 4064],['Website visits', 15654],['Requested price list', 1987],['Invoice sent', 976],['Finalized', 846]];
 //var sampleData = [{"createIssue": 30}, {"goBackToIssue": 20}, {"issue": 15}, {"other": 12}];
 
 function drawGraph(element, title, data) {
@@ -48,6 +48,12 @@ $(document).ready(function() {
 	chrome.storage.local.get(null, function(item){
 		//$("#out").text(JSON.stringify(item));
 		console.log(item);
+
+		var keyData = [];
+
+		for (var value in item) {
+			console.log(value +" : "+ item[value]);
+		}
 
 		drawGraph($('#gui-graph'), "Tools invoked with Mouse", sampleData);
 		drawGraph($('#key-graph'), "Tools invoked with Keyboard Shortcuts", sampleData);
