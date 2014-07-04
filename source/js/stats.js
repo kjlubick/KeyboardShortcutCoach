@@ -13,7 +13,7 @@ function drawGraph(element, title, data) {
 	element.highcharts({
 			chart: {
 				type: 'funnel',
-				marginRight: 100
+				marginRight: 0
 			},
 			title: {
 				text: title,
@@ -55,33 +55,42 @@ function sortArrayDoubles(a,b) {
 	return b[1] - a[1];
 }
 
+function parseStoredJSON(data) {
+	console.log(data);
+
+	for (var value in data) {
+		var split = value.split(".");
+		var application = split[0], type = split[1], tool = split[2];
+
+		var applicationHash = usageData[application];
+		if (applicationHash === undefined) {
+			applicationHash = {key: [], menu: []};
+		} 
+		applicationHash[type].push([tool, data[value]]);
+		usageData[application] = applicationHash;
+	}
+
+	for(value in usageData) {
+		usageData[value].menu.sort(sortArrayDoubles);
+		usageData[value].key.sort(sortArrayDoubles);
+	}
+
+	console.log(usageData);
+}
+
+
+function displayApplication(app) {
+	drawGraph($('#gui-graph'), "Tools invoked with Mouse", usageData[app].menu);
+	drawGraph($('#key-graph'), "Tools invoked with Keyboard Shortcuts", usageData[app].key);
+
+}
+
+
 $(document).ready(function() {
-	chrome.storage.local.get(null, function(item){
-		//$("#out").text(JSON.stringify(item));
-		console.log(item);
+	chrome.storage.local.get(null, function(data){
+		parseStoredJSON(data);
 
-		for (var value in item) {
-			var split = value.split(".");
-			var application = split[0], type = split[1], tool = split[2];
-
-			var applicationHash = usageData[application];
-			if (applicationHash === undefined) {
-				applicationHash = {key: [], menu: []};
-			} 
-			applicationHash[type].push([tool, item[value]]);
-			usageData[application] = applicationHash;
-		}
-
-		for(value in usageData) {
-			usageData[value].menu.sort(sortArrayDoubles);
-			usageData[value].key.sort(sortArrayDoubles);
-		}
-
-		console.log(usageData);
-
-		drawGraph($('#gui-graph'), "Tools invoked with Mouse", usageData.Gmail.menu);
-		drawGraph($('#key-graph'), "Tools invoked with Keyboard Shortcuts", usageData.Gmail.key);
-
+		
 	});
 });
 
