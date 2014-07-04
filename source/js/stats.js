@@ -17,7 +17,7 @@ function drawGraph(element, title, data) {
 			},
 			title: {
 				text: title,
-				x: -50
+				align: "center"
 			},
 			exporting: {
 				enabled: false
@@ -31,8 +31,11 @@ function drawGraph(element, title, data) {
 						softConnector: true
 					}
 				},
-				neckWidth: '30%',
-                neckHeight: '25%'
+				funnel: {
+					neckWidth: '80%',
+               	 	neckHeight: '100%'
+				}
+				
 			},
 			legend: {
 				enabled: false
@@ -78,10 +81,30 @@ function parseStoredJSON(data) {
 	console.log(usageData);
 }
 
+function sumArrayDoubles(arr) {
+	var sum = 0;
+	for (var i = arr.length - 1; i >= 0; i--) {
+		sum+= arr[i][1];
+	}
+	return sum;
+}
+
 
 function displayApplication(app) {
-	drawGraph($('#gui-graph'), "Tools invoked with Mouse", usageData[app].menu);
-	drawGraph($('#key-graph'), "Tools invoked with Keyboard Shortcuts", usageData[app].key);
+	var keyTotal = sumArrayDoubles(usageData[app].key), guiTotal = sumArrayDoubles(usageData[app].menu);
+	console.log(keyTotal);
+	console.log(guiTotal);
+
+	if (keyTotal > guiTotal) {
+		$('#key-graph').css("height",0.9*window.innerHeight);
+		$('#gui-graph').css("height", Math.max(0.9*window.innerHeight * guiTotal / keyTotal, 0.9*window.innerHeight * 0.4) );
+	} else {
+		$('#gui-graph').css("height",0.9*window.innerHeight);
+	}
+
+
+	drawGraph($('#gui-graph'), guiTotal + " Tools invoked with Mouse", usageData[app].menu);
+	drawGraph($('#key-graph'), keyTotal + " Tools invoked with Keyboard Shortcuts", usageData[app].key);
 
 }
 
@@ -90,7 +113,7 @@ $(document).ready(function() {
 	chrome.storage.local.get(null, function(data){
 		parseStoredJSON(data);
 
-		
+		displayApplication("Gmail");
 	});
 });
 
