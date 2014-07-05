@@ -97,7 +97,7 @@ function displayApplication(app) {
 
 	if (keyTotal > guiTotal) {
 		$('#key-graph').css("height",0.9*window.innerHeight);
-		$('#gui-graph').css("height", Math.max(0.9*window.innerHeight * guiTotal / keyTotal, 0.9*window.innerHeight * 0.4) );
+		$('#gui-graph').css("height", Math.max(0.9*window.innerHeight * guiTotal / keyTotal, 0.9*window.innerHeight * 0.3) );
 	} else {
 		$('#gui-graph').css("height",0.9*window.innerHeight);
 	}
