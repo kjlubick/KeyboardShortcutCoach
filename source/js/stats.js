@@ -1,19 +1,19 @@
 ﻿/*global chrome, Highcharts*/
 
-var sampleData = [['Downloads', 4064],['Website visits', 15654],['Requested price list', 1987],['Invoice sent', 976],['Finalized', 846]];
-//var sampleData = [{"createIssue": 30}, {"goBackToIssue": 20}, {"issue": 15}, {"other": 12}];
-
-
 //var usageData = {Application1 : {keyTools: [[tool1,uses],[tool2, uses]] guiTools: [[tool3,uses],[tool4,uses]]}}
 var usageData = {};
 
+//var descriptions = {Application1: {toolid: {long_desc: "MER MER MER", short_desc: "Max Length N chars"}}}
+var descriptions = {};
+
+var currentApplication = "Gmail";
 
 
 function drawGraph(element, title, data) {
 	element.highcharts({
 			chart: {
 				type: 'funnel',
-				marginRight: 0
+				marginRight: '50'
 			},
 			title: {
 				text: title,
@@ -25,7 +25,7 @@ function drawGraph(element, title, data) {
 			plotOptions: {
 				series: {
 					dataLabels: {
-						enabled: false,
+						enabled: true,
 						format: '<b>{point.name}</b> ({point.y:,.0f})',
 						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
 						softConnector: true
@@ -110,11 +110,18 @@ function displayApplication(app) {
 
 
 $(document).ready(function() {
-	chrome.storage.local.get(null, function(data){
-		parseStoredJSON(data);
 
-		displayApplication("Gmail");
+	chrome.runtime.sendMessage({"getDescriptions":true}, function(response){
+		descriptions = response;
+		console.log(descriptions);
+		chrome.storage.local.get(null, function(data){
+			parseStoredJSON(data);
+
+			displayApplication(currentApplication);
+		});
 	});
+
+	
 });
 
 
