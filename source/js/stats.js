@@ -11,29 +11,34 @@ var currentApplication = "Gmail";
 
 function drawGraph(element, title, data) {
 	element.highcharts({
-			chart: {
-				type: 'funnel',
-				marginRight: '50'
-			},
-			title: {
-				text: title,
-				align: "center"
-			},
-			exporting: {
-				enabled: false
-			},
-			plotOptions: {
-				series: {
-					dataLabels: {
-						enabled: true,
-						format: '<b>{point.name}</b> ({point.y:,.0f})',
+		chart: {
+			type: 'funnel',
+			marginRight: '100'
+		},
+		title: {
+			text: title,
+			align: "center"
+		},
+		exporting: {
+			enabled: false
+		},
+		plotOptions: {
+			series: {
+				dataLabels: {
+					enabled: true,
+						//format: '<b>{point.name}</b> ({point.y:,.0f})',
+						formatter: function() {
+							var toolDesc = descriptions[currentApplication][this.key] ? descriptions[currentApplication][this.key].short_desc : this.key;
+							//console.log(toolDesc);
+							return '<b>' + toolDesc + ':</b> '+this.y+" uses";
+						},
 						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
 						softConnector: true
 					}
 				},
 				funnel: {
 					neckWidth: '80%',
-               	 	neckHeight: '100%'
+					neckHeight: '100%'
 				}
 				
 			},
@@ -42,8 +47,9 @@ function drawGraph(element, title, data) {
 			},
 			tooltip: {
 				formatter: function() {
-					//console.log(this);
-					return "You've invoked " + this.key +" "+ this.y+" times.";
+					var toolDesc = descriptions[currentApplication][this.key] ? descriptions[currentApplication][this.key].long_desc : this.key;
+					console.log(toolDesc);
+					return "You've invoked \"" + toolDesc +"\" "+ this.y+" times.";
 				}
 			},
 			series: [{
