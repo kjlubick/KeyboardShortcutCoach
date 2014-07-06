@@ -29,7 +29,7 @@ function drawGraph(element, title, data) {
 						formatter: function() {
 							var toolDesc = descriptions[currentApplication][this.key] ? descriptions[currentApplication][this.key].short_desc : this.key;
 							//console.log(toolDesc);
-							return '<b>' + toolDesc + ':</b> '+this.y+" uses";
+							return '<b>' + toolDesc + ':</b> '+this.y+" use" + (this.y > 1 ? "s":"");
 						},
 						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
 						softConnector: true
@@ -47,8 +47,8 @@ function drawGraph(element, title, data) {
 			tooltip: {
 				formatter: function() {
 					var toolDesc = descriptions[currentApplication][this.key] ? descriptions[currentApplication][this.key].long_desc : this.key;
-					console.log(toolDesc);
-					return "You've invoked \"" + toolDesc +"\" "+ this.y+" times.";
+					//console.log(toolDesc);
+					return "You've invoked \"" + toolDesc +"\" "+ this.y+" time" + (this.y > 1 ? "s.":".");
 				}
 			},
 			series: [{
@@ -105,7 +105,7 @@ function displayApplication(app) {
 		$('#gui-graph').css("height",0.9*window.innerHeight);
 	}
 
-
+	withMouse = true;
 	drawGraph($('#gui-graph'), guiTotal + " Tools invoked with Mouse", usageData[app].menu);
 	drawGraph($('#key-graph'), keyTotal + " Tools invoked with Keyboard Shortcuts", usageData[app].key);
 

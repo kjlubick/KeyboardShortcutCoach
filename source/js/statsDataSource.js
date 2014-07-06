@@ -67,6 +67,10 @@ var descriptions = {"Gmail" : {
 		"long_desc": "Long",
 		"short_desc": "Short"
 	},
+	'olderConvo': {
+		"long_desc": "Long",
+		"short_desc": "Short"
+	},
 	"search": {
 		"long_desc": "Long",
 		"short_desc": "Short"
@@ -80,10 +84,6 @@ var descriptions = {"Gmail" : {
 		"short_desc": "Short"
 	},
 	"starConvo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
-	},
-	"archive": {
 		"long_desc": "Long",
 		"short_desc": "Short"
 	},
