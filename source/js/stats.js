@@ -105,7 +105,6 @@ function displayApplication(app) {
 		$('#gui-graph').css("height",0.9*window.innerHeight);
 	}
 
-	withMouse = true;
 	drawGraph($('#gui-graph'), guiTotal + " Tools invoked with Mouse", usageData[app].menu);
 	drawGraph($('#key-graph'), keyTotal + " Tools invoked with Keyboard Shortcuts", usageData[app].key);
 
