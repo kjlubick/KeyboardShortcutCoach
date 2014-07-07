@@ -62,51 +62,51 @@ var descriptions = {"Gmail" : {
 		"short_desc": "Return to List"
 	},
 	"newerConvo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Go to Newer Conversation",
+		"short_desc": "Newer Conversation"
 	},
 	'olderConvo': {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Go to Older Conversation",
+		"short_desc": "Older Conversation"
 	},
 	"search": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Search Messages",
+		"short_desc": "Search"
 	},
 	"searchContacts": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Search Contacts",
+		"short_desc": "Search Contacts"
 	},
 	"selectSingleConvo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Select\\Unselect This Conversation",
+		"short_desc": "Select Convo"
 	},
 	"starConvo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Star\\Unstar This Conversation",
+		"short_desc": "Star Convo"
 	},
 	"muteConvo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Mute Conversation and Ignore Replies",
+		"short_desc": "Mute Convo"
 	},
 	"reportSpam": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Report This Message as Spam",
+		"short_desc": "Report Spam"
 	},
 	"delete": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Delete Message",
+		"short_desc": "Delete"
 	},
 	"reply": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Reply to this Message",
+		"short_desc": "Reply"
 	},
 	"replyAll": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Reply to All Recipients",
+		"short_desc": "Reply All"
 	},
 	"forward": {
-		"long_desc": "Long",
+		"long_desc": "Forward Message",
 		"short_desc": "Short"
 	},
 	"updateConvo": {
