@@ -10,58 +10,56 @@ var descriptions = {"Gmail" : {
 		"short_desc": "Archive",
 	},
 	"composeMessage": {
-		"long_desc": "Archive an Email",
-		"short_desc": "Archive",
+		"long_desc": "Compose an Email",
+		"short_desc": "Compose",
 	},
-
-
 	"gotoStarred": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Goto Starred Conversations",
+		"short_desc": "Goto Starred"
 	},
 	"gotoSent": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Goto Sent Conversation",
+		"short_desc": "Goto Sent"
 	},
 	"gotoDrafts": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Goto Drafts",
+		"short_desc": "Goto Drafts"
 	},
 	"gotoContacts": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "View Contacts",
+		"short_desc": "View Contacts"
 	},
 	"gotoTasks": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "View Tasks",
+		"short_desc": "View Tasks"
 	},
 	"selectAllConvos": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Select All Conversations",
+		"short_desc": "Select All"
 	},
 	"deselectAllConvos": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Deselect All Conversations",
+		"short_desc": "Deselect All"
 	},
 	"selectReadConvos": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Select Read Conversations",
+		"short_desc": "Select Read"
 	},
 	"selectUnreadConvos": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Select Unread Conversations",
+		"short_desc": "Select Unread"
 	},
 	"selectStarred": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Select Starred Conversations",
+		"short_desc": "Select Starred"
 	},
 	"selectUnstarred": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Select Unstarred Conversations",
+		"short_desc": "Select Unstarred"
 	},
 	"returnToList": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Return to Conversation List",
+		"short_desc": "Return to List"
 	},
 	"newerConvo": {
 		"long_desc": "Long",
