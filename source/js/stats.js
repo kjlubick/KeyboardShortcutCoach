@@ -55,7 +55,12 @@ function drawGraph(element, title, data) {
 			series: [{
 				name: 'Unique users',
 				'data': data
-			}]
+			}],
+			drilldown: {
+				//If I want to do multiple drilldown
+				//http://stackoverflow.com/questions/23153403/drilldown-multiple-levels-highchart
+
+			}
 		});
 }
 
