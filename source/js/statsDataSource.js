@@ -146,8 +146,8 @@ var descriptions = {"Gmail" : {
 		"short_desc": "Phone Call"
 	},
 	"searchLabel": {
-		"long_desc": "Search Messages by Label",
-		"short_desc": "Label Search"
+		"long_desc": "Goto Messages with Label",
+		"short_desc": "Goto Label"
 	}
 },
 "GitHub" : {

@@ -1,6 +1,7 @@
 ﻿/*global chrome, Highcharts*/
 
-//var usageData = {Application1 : {keyTools: [[tool1,uses],[tool2, uses]] guiTools: [[tool3,uses],[tool4,uses]]}}
+//var usageData = {Application1 : {keyTools: [{name:tool1,y:uses},{name:tool2,y:uses}],
+//guiTools: [{name:tool3,y:uses},{name:tool4,y:uses}]}}
 var usageData = {};
 
 //var descriptions = {Application1: {toolid: {long_desc: "MER MER MER", short_desc: "Max Length N chars"}}}
@@ -12,7 +13,7 @@ function drawGraph(element, title, data) {
 	element.highcharts({
 		chart: {
 			type: 'funnel',
-			marginRight: '100'
+			marginRight: '120'
 		},
 		title: {
 			text: title,
@@ -59,7 +60,7 @@ function drawGraph(element, title, data) {
 }
 
 function sortArrayDoubles(a,b) {
-	return b[1] - a[1];
+	return b.y - a.y;
 }
 
 function parseStoredJSON(data) {
@@ -73,7 +74,7 @@ function parseStoredJSON(data) {
 		if (applicationHash === undefined) {
 			applicationHash = {key: [], menu: []};
 		} 
-		applicationHash[type].push([tool, data[value]]);
+		applicationHash[type].push({name: tool, y: data[value]});
 		usageData[application] = applicationHash;
 	}
 
@@ -88,7 +89,7 @@ function parseStoredJSON(data) {
 function sumArrayDoubles(arr) {
 	var sum = 0;
 	for (var i = arr.length - 1; i >= 0; i--) {
-		sum+= arr[i][1];
+		sum += arr[i].y;
 	}
 	return sum;
 }
