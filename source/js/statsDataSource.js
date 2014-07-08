@@ -63,11 +63,11 @@ var descriptions = {"Gmail" : {
 	},
 	"newerConvo": {
 		"long_desc": "Go to Newer Conversation",
-		"short_desc": "Newer Conversation"
+		"short_desc": "Newer Convo"
 	},
 	'olderConvo': {
 		"long_desc": "Go to Older Conversation",
-		"short_desc": "Older Conversation"
+		"short_desc": "Older Convo"
 	},
 	"search": {
 		"long_desc": "Search Messages",
@@ -110,44 +110,44 @@ var descriptions = {"Gmail" : {
 		"short_desc": "Short"
 	},
 	"updateConvo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Update Conversation with Recently Received Messages",
+		"short_desc": "Update Convo"
 	},
 	"send": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Send Message",
+		"short_desc": "Send"
 	},
 	"undo": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Undo Last Action",
+		"short_desc": "Undo"
 	},
 	"markAsRead": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Mark Message(s) as Read",
+		"short_desc": "Mark Read"
 	},
 	"markAsUnread": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Mark Message(s) as Unread",
+		"short_desc": "Mark Unread"
 	},
 	"markCurrentAsUnread": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Mark Current Message as Unread and Go to Inbox",
+		"short_desc": "Mark Current..."
 	},
 	"markImportant": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Mark Message(s) as Important",
+		"short_desc": "Mark Important"
 	},
 	"markUnimportant": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Mark Message(s) as Unimportant",
+		"short_desc": "Mark Unimportant"
 	},
 	"makePhoneCall": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Make Phone Call",
+		"short_desc": "Phone Call"
 	},
 	"searchLabel": {
-		"long_desc": "Long",
-		"short_desc": "Short"
+		"long_desc": "Search Messages by Label",
+		"short_desc": "Label Search"
 	}
 },
 "GitHub" : {
