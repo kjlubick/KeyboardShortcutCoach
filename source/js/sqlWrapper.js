@@ -10,12 +10,24 @@ function setUpDB(){
 	});
 }
 
+function executeQuery(tx, query, params, onSuccess) {
+	onSuccess = (onSuccess ? onSuccess : function(){});	//default to empty function for success
+	tx.executeSql(query, params,onSuccess, function(t, error) {
+		log("Error : "+ error.message + " in " + query + " using params:");
+		logf(params);
+		logf(t);
+	});
+}
+
 function reportTool(application, tool, invocation){
 	db.transaction(function (tx) {
 		log("storing "+application+" "+tool+" "+invocation);
-		
-		tx.executeSql("INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
+
+		executeQuery(tx, "INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
 			[application,tool,invocation,new Date().getTime()]);
+
+		//tx.executeSql("INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
+		//	[application,tool,invocation,new Date().getTime()]);
 
 		// tx.executeSql('SELECT * FROM tools', [], function (tx, results) {
 		// 	var len = results.rows.length, i;
