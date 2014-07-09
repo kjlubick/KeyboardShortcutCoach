@@ -12,10 +12,10 @@ function setUpDB(){
 
 function reportTool(application, tool, invocation){
 	db.transaction(function (tx) {
-		var query = 'INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES("'+
-			application + '","' + tool + '","' + invocation + '",'+ ((new Date()).getTime()) +')';
-		logf(query);
-		tx.executeSql(query);
+		log("storing "+application+" "+tool+" "+invocation);
+		
+		tx.executeSql("INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
+			[application,tool,invocation,new Date().getTime()]);
 
 		// tx.executeSql('SELECT * FROM tools', [], function (tx, results) {
 		// 	var len = results.rows.length, i;
