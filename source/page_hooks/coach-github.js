@@ -50,6 +50,7 @@ function incrementTool(keyName) {
         }
 
     });
+    chrome.runtime.sendMessage({sawTool:keyName});
  }
 
 function keyBindingCallBack(toolName) {

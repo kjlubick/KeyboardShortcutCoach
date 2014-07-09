@@ -1,0 +1,42 @@
+/*global chrome, logf,log*/
+var db;
+
+
+function setUpDB(){
+	db = openDatabase('toolDB', '1.0', 'A Database of tool uses and times', 5 * 1024 * 1024);
+	db.transaction(function (tx) {
+		tx.executeSql('CREATE TABLE IF NOT EXISTS tools (id INTEGER PRIMARY KEY ASC AUTOINCREMENT, application_name TEXT, tool_name TEXT,'+ 
+			'invocation_method TEXT, timestamp INTEGER)');
+	});
+}
+
+function reportTool(application, tool, invocation){
+	db.transaction(function (tx) {
+		var query = 'INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES("'+
+			application + '","' + tool + '","' + invocation + '",'+ ((new Date()).getTime()) +')';
+		logf(query);
+		tx.executeSql(query);
+
+		// tx.executeSql('SELECT * FROM tools', [], function (tx, results) {
+		// 	var len = results.rows.length, i;
+		// 	log("Select all");
+		// 	for (i = 0; i < len; i++) {
+		// 		logf(results.rows.item(i));
+		// 	}
+		// });
+	});
+}
+
+chrome.runtime.onMessage.addListener(
+	function(request) {
+		if (request.sawTool) {
+			if (!db) {
+				setUpDB();
+			}
+			var splits = request.sawTool.split(".");
+			if (splits.length >= 3) {
+				reportTool(splits[0],splits[1],splits[2]);
+			}
+		}
+	}
+);
