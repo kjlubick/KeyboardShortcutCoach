@@ -26,9 +26,6 @@ function reportTool(application, tool, invocation){
 		executeQuery(tx, "INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
 			[application,tool,invocation,new Date().getTime()]);
 
-		//tx.executeSql("INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
-		//	[application,tool,invocation,new Date().getTime()]);
-
 		// tx.executeSql('SELECT * FROM tools', [], function (tx, results) {
 		// 	var len = results.rows.length, i;
 		// 	log("Select all");
@@ -40,7 +37,7 @@ function reportTool(application, tool, invocation){
 }
 
 chrome.runtime.onMessage.addListener(
-	function(request) {
+	function(request, source, callback) {
 		if (request.sawTool) {
 			if (!db) {
 				setUpDB();
@@ -49,6 +46,12 @@ chrome.runtime.onMessage.addListener(
 			if (splits.length >= 3) {
 				reportTool(splits[0],splits[1],splits[2]);
 			}
+		}
+		else if (request.getLastWeek) {
+			executeQuery("Select * from tools Where timestamp > ?",[new Date().getTime() - 7*24*60*60000], function(data){
+				callback(data);
+			});
+			return false;		//delay the callback
 		}
 	}
 );
