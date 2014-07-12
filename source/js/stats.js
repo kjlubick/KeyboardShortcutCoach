@@ -1,4 +1,4 @@
-﻿/*global chrome, Highcharts*/
+﻿/*global chrome, Highcharts, logf*/
 
 //var usageData = {Application1 : {keyTools: [{name:tool1,y:uses},{name:tool2,y:uses}],
 //guiTools: [{name:tool3,y:uses},{name:tool4,y:uses}]}}
@@ -9,7 +9,18 @@ var descriptions = {};
 
 var currentApplication = "Gmail";
 
+function setUpForDrillDown(data) {
+	logf(data);
+
+	return [data,{}];
+}
+
 function drawGraph(element, title, data) {
+
+	var drillDownArr = setUpForDrillDown(data);
+	var firstData = drillDownArr[0];
+	var drillDownData = drillDownArr[1];
+
 	element.highcharts({
 		chart: {
 			type: 'funnel',
@@ -54,12 +65,12 @@ function drawGraph(element, title, data) {
 			},
 			series: [{
 				name: 'Unique users',
-				'data': data
+				'data': firstData
 			}],
 			drilldown: {
 				//If I want to do multiple drilldown
 				//http://stackoverflow.com/questions/23153403/drilldown-multiple-levels-highchart
-
+				series : drillDownData
 			}
 		});
 }
