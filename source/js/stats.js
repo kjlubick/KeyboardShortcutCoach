@@ -9,6 +9,8 @@ var descriptions = {};
 
 var currentApplication = "Gmail";
 
+var activeCharts = [];
+
 function setUpForDrillDown(data) {
 	//logf(data);
 
@@ -73,6 +75,7 @@ function drawGraph(element, title, data) {
 				series : drillDownData
 			}
 		});
+		activeCharts.push(element.highcharts());
 }
 
 function sortArrayDoubles(a,b) {
@@ -124,6 +127,8 @@ function displayApplication(app) {
 
 	drawGraph($('#gui-graph'), guiTotal + " Tools invoked with Mouse", usageData[app].menu);
 	drawGraph($('#key-graph'), keyTotal + " Tools invoked with Keyboard Shortcuts", usageData[app].key);
+
+	logf(activeCharts);
 
 }
 
