@@ -10,7 +10,7 @@ var descriptions = {};
 var currentApplication = "Gmail";
 
 function setUpForDrillDown(data) {
-	logf(data);
+	//logf(data);
 
 	return [data,{}];
 }
