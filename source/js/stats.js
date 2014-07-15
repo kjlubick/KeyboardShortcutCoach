@@ -130,6 +130,11 @@ function displayApplication(app) {
 
 	logf(activeCharts);
 
+	$("#expandLeft").on('click', function() {
+		activeCharts[0].setSize(activeCharts[0].chartWidth,0.9*window.innerHeight);
+		$(this).parent().children("div").first().animate({height:0.9*window.innerHeight},300);
+	});
+
 }
 
 $(document).ready(function() {
