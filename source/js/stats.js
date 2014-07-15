@@ -1,4 +1,4 @@
-﻿/*global chrome, Highcharts, logf*/
+﻿/*global chrome, Highcharts, log, logf*/
 
 //var usageData = {Application1 : {keyTools: [{name:tool1,y:uses},{name:tool2,y:uses}],
 //guiTools: [{name:tool3,y:uses},{name:tool4,y:uses}]}}
@@ -39,10 +39,8 @@ function drawGraph(element, title, data) {
 			series: { 
 				dataLabels: {
 					enabled: true,
-						//format: '<b>{point.name}</b> ({point.y:,.0f})',
 						formatter: function() {
 							var toolDesc = descriptions[currentApplication][this.key] ? descriptions[currentApplication][this.key].short_desc : this.key;
-							//console.log(toolDesc);
 							return '<b>' + toolDesc + ':</b> '+this.y+" use" + (this.y > 1 ? "s":"");
 						},
 						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
@@ -50,7 +48,7 @@ function drawGraph(element, title, data) {
 					}
 				},
 				funnel: {
-					neckWidth: '80%',
+					neckWidth: '80%',	// no actual funnelling, just stacked column
 					neckHeight: '100%'
 				}
 				
@@ -113,16 +111,38 @@ function sumArrayDoubles(arr) {
 	return sum;
 }
 
+function getFullDisplayHeight() {
+	return 0.9*window.innerHeight;
+}
+
+function toggleExpansion(indexOfGraphToExpand, buttonToMove) {
+	var chart = activeCharts[indexOfGraphToExpand];
+
+	chart.setSize(chart.chartWidth,getFullDisplayHeight());
+	buttonToMove.siblings("div").first().animate({height:getFullDisplayHeight()},300);
+}
+
 function displayApplication(app) {
 	var keyTotal = sumArrayDoubles(usageData[app].key), guiTotal = sumArrayDoubles(usageData[app].menu);
-	console.log(keyTotal);
-	console.log(guiTotal);
+	log(keyTotal);
+	log(guiTotal);
 
 	if (keyTotal > guiTotal) {
-		$('#key-graph').css("height",0.9*window.innerHeight);
-		$('#gui-graph').css("height", Math.max(0.9*window.innerHeight * guiTotal / keyTotal, 0.9*window.innerHeight * 0.3) );
+		$('#key-graph').css("height",getFullDisplayHeight());
+		$('#gui-graph').css("height", Math.max(getFullDisplayHeight() * guiTotal / keyTotal, getFullDisplayHeight() * 0.3) );
+		
+		$("#expandLeft").on('click', function() {
+			toggleExpansion(0, $(this));
+		});
+		$("#expandRight").hide();
 	} else {
-		$('#gui-graph').css("height",0.9*window.innerHeight);
+		$('#gui-graph').css("height",getFullDisplayHeight());
+		$('#key-graph').css("height", Math.max(getFullDisplayHeight() * keyTotal / guiTotal, getFullDisplayHeight() * 0.3) );
+
+		$("#expandRight").on('click', function() {
+			toggleExpansion(1, $(this));
+		});
+		$("#expandLeft").hide();
 	}
 
 	drawGraph($('#gui-graph'), guiTotal + " Tools invoked with Mouse", usageData[app].menu);
@@ -130,10 +150,7 @@ function displayApplication(app) {
 
 	logf(activeCharts);
 
-	$("#expandLeft").on('click', function() {
-		activeCharts[0].setSize(activeCharts[0].chartWidth,0.9*window.innerHeight);
-		$(this).parent().children("div").first().animate({height:0.9*window.innerHeight},300);
-	});
+	
 
 }
 
