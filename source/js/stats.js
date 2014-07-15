@@ -117,9 +117,20 @@ function getFullDisplayHeight() {
 
 function toggleExpansion(indexOfGraphToExpand, buttonToMove) {
 	var chart = activeCharts[indexOfGraphToExpand];
+	if (buttonToMove.hasClass("active")) {
+		//already expanded
+		chart.setSize(chart.chartWidth,chart.scaledHeight);
+		buttonToMove.siblings("div").first().animate({height:chart.scaledHeight},300);
+		buttonToMove.text("Expand to Full Size");
+	} else {
+		//already minimized
+		chart.scaledHeight = chart.chartHeight;		//save this for when we re-shrink
 
-	chart.setSize(chart.chartWidth,getFullDisplayHeight());
-	buttonToMove.siblings("div").first().animate({height:getFullDisplayHeight()},300);
+		chart.setSize(chart.chartWidth,getFullDisplayHeight());
+		buttonToMove.siblings("div").first().animate({height:getFullDisplayHeight()},300);
+
+		buttonToMove.text("Shrink to Scale");
+	}
 }
 
 function displayApplication(app) {
