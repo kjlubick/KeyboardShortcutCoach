@@ -1,4 +1,4 @@
-/*global chrome, logf,log, _*/
+/*global chrome, logf, log*/
 var db;
 
 
@@ -52,7 +52,6 @@ function extractSQLRows(sqlData) {
 
 chrome.runtime.onMessage.addListener(
 	function(request, source, callback) {
-		log("using lowdash version " + _.VERSION);
 		if (!db) {
 			setUpDB();
 		}
