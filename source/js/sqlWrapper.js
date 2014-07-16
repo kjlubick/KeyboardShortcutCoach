@@ -1,4 +1,4 @@
-/*global chrome, logf,log*/
+/*global chrome, logf,log, _*/
 var db;
 
 
@@ -10,7 +10,13 @@ function setUpDB(){
 	});
 }
 
-function executeQuery(tx, query, params, onSuccess) {
+function executeQuery(query, params, onSuccess) {
+	db.transaction(function (tx) {
+		executeQueryInTransaction(tx, query, params, onSuccess);
+	});
+}
+
+function executeQueryInTransaction(tx, query, params, onSuccess) {
 	onSuccess = (onSuccess ? onSuccess : function(){});	//default to empty function for success
 	tx.executeSql(query, params,onSuccess, function(t, error) {
 		log("Error : "+ error.message + " in " + query + " using params:");
@@ -23,7 +29,7 @@ function reportTool(application, tool, invocation){
 	db.transaction(function (tx) {
 		log("storing "+application+" "+tool+" "+invocation);
 
-		executeQuery(tx, "INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
+		executeQueryInTransaction(tx, "INSERT INTO tools (application_name, tool_name, invocation_method , timestamp) VALUES (?,?,?,?)",
 			[application,tool,invocation,new Date().getTime()]);
 
 		// tx.executeSql('SELECT * FROM tools', [], function (tx, results) {
@@ -36,22 +42,43 @@ function reportTool(application, tool, invocation){
 	});
 }
 
+function extractSQLRows(sqlData) {
+	var retVal = [];
+	for(var i = 0;i< sqlData.rows.length; i++) {
+		retVal.push(sqlData.rows.item(i));
+	}
+	return retVal;
+}
+
 chrome.runtime.onMessage.addListener(
 	function(request, source, callback) {
+		log("using lowdash version " + _.VERSION);
+		if (!db) {
+			setUpDB();
+		}
 		if (request.sawTool) {
-			if (!db) {
-				setUpDB();
-			}
+			
 			var splits = request.sawTool.split(".");
 			if (splits.length >= 3) {
 				reportTool(splits[0],splits[1],splits[2]);
 			}
 		}
 		else if (request.getLastWeek) {
-			executeQuery("Select * from tools Where timestamp > ?",[new Date().getTime() - 7*24*60*60000], function(data){
-				callback(data);
+			executeQuery("Select * from tools Where timestamp > ?",[new Date().getTime() - 7*24*60*60000], function(tx, data){
+				logf(tx);
+				log(data);		//JSON.wtringify() fails on data if nothing was inserted because insertID doesn't exist or something
+				callback(extractSQLRows(data));
 			});
-			return false;		//delay the callback
+			return true;		//delay the callback
+		}
+		else if (request.getAll) {
+			executeQuery("Select * from tools",[], function(tx, data){
+				callback(extractSQLRows(data));
+			});
+			return true;		//delay the callback
+		}
+		else {
+			log("I don't know how to handle "+JSON.stringify(request));
 		}
 	}
 );
