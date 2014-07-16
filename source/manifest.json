@@ -19,7 +19,7 @@
 
        "background": {
          "persistent":false,
-         "scripts" : ["js/logger.js", "js/statsDataSource.js", "js/sqlWrapper.js"]
+         "scripts" : ["js/lodash.js","js/logger.js", "js/statsDataSource.js", "js/sqlWrapper.js"]
       },
 
       "browser_action": {
