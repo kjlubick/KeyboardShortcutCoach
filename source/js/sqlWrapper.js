@@ -61,9 +61,12 @@ chrome.runtime.onMessage.addListener(
 			if (splits.length >= 3) {
 				reportTool(splits[0],splits[1],splits[2]);
 			}
+			else {
+				console.error("Problem splitting tool "+request.sawTool);
+			}
 		}
-		else if (request.getLastWeek) {
-			executeQuery("Select * from tools Where timestamp > ?",[new Date().getTime() - 7*24*60*60000], function(tx, data){
+		else if (request.getTime) {
+			executeQuery("Select * from tools Where timestamp > ?",[request.getTime], function(tx, data){
 				logf(tx);
 				log(data);		//JSON.wtringify() fails on data if nothing was inserted because insertID doesn't exist or something
 				callback(extractSQLRows(data));
