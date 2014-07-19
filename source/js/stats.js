@@ -160,9 +160,6 @@ function displayApplication(app) {
 	drawGraph($('#key-graph'), keyTotal + " Tools invoked with Keyboard Shortcuts", usageData[app].key);
 
 	logf(activeCharts);
-
-	
-
 }
 
 $(document).ready(function() {
@@ -170,6 +167,11 @@ $(document).ready(function() {
 	chrome.runtime.sendMessage({"getDescriptions":true}, function(response){
 		descriptions = response;
 		console.log(descriptions);
+		var applications = Object.keys(descriptions);
+		var appInsertionPoint = $("#application-insert-point");
+		for(var i = 0; i< applications.length;i++) {
+			appInsertionPoint.append("<option value='"+applications[i]+"'>"+applications[i]+"</option>");
+		}
 		chrome.storage.local.get(null, function(data){
 			parseStoredJSON(data);
 
