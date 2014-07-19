@@ -112,7 +112,7 @@ function sumArrayDoubles(arr) {
 }
 
 function getFullDisplayHeight() {
-	return 0.9*window.innerHeight;
+	return 0.9*(window.innerHeight - 50); //subtract 50 for navbar
 }
 
 function toggleExpansion(indexOfGraphToExpand, buttonToMove) {
@@ -120,7 +120,7 @@ function toggleExpansion(indexOfGraphToExpand, buttonToMove) {
 	if (buttonToMove.hasClass("active")) {
 		//already expanded
 		chart.setSize(chart.chartWidth,chart.scaledHeight);
-		buttonToMove.siblings("div").first().animate({height:chart.scaledHeight},300);
+		buttonToMove.siblings("div").first().animate({height:chart.scaledHeight},400); //slower shrink so the button doesn't beat the graph to size
 		buttonToMove.text("Expand to Full Size");
 	} else {
 		//already minimized
