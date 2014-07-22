@@ -7,7 +7,7 @@ var usageData = {};
 //var descriptions = {Application1: {toolid: {long_desc: "MER MER MER", short_desc: "Max Length N chars"}}}
 var descriptions = {};
 
-var currentApplication = "Gmail";
+var currentApplication = "";
 
 var activeCharts = [];
 
@@ -135,6 +135,7 @@ function toggleExpansion(indexOfGraphToExpand, buttonToMove) {
 
 function displayApplication(app) {
 	var keyTotal = sumArrayDoubles(usageData[app].key), guiTotal = sumArrayDoubles(usageData[app].menu);
+	currentApplication = app;
 	log(keyTotal);
 	log(guiTotal);
 
@@ -171,15 +172,17 @@ $(document).ready(function() {
 	chrome.runtime.sendMessage({"getDescriptions":true}, function(response){
 		descriptions = response;
 		console.log(descriptions);
+
 		var applications = Object.keys(descriptions);
 		var appInsertionPoint = $("#application-insert-point");
 		for(var i = 0; i< applications.length;i++) {
 			appInsertionPoint.append("<option value='"+applications[i]+"'>"+applications[i]+"</option>");
 		}
+
 		chrome.storage.local.get(null, function(data){
 			parseStoredJSON(data);
 
-			displayApplication(currentApplication);
+			displayApplication(applications[0]);
 		});
 	});	
 });
