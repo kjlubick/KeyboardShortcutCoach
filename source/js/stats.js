@@ -157,6 +157,7 @@ function displayApplication(app) {
 		$("#expandLeft").hide();
 	}
 
+	activeCharts = [];
 	drawGraph($('#gui-graph'), guiTotal + " Tools invoked with Mouse", usageData[app].menu);
 	drawGraph($('#key-graph'), keyTotal + " Tools invoked with Keyboard Shortcuts", usageData[app].key);
 
