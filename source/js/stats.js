@@ -164,6 +164,10 @@ function displayApplication(app) {
 
 $(document).ready(function() {
 
+	$("#application-insert-point").on("change", function(event){
+		displayApplication($(this).val());
+	});
+
 	chrome.runtime.sendMessage({"getDescriptions":true}, function(response){
 		descriptions = response;
 		console.log(descriptions);
