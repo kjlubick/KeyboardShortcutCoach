@@ -151,7 +151,22 @@ var descriptions = {"Gmail" : {
 	}
 },
 "GitHub" : {
-
+	"toggleMDPreview": {
+		"long_desc": "Toggle Preview of Markdown",
+		"short_desc": "Preview Post"
+	},
+	"switchBranch": {
+		"long_desc": "Switch between branches",
+		"short_desc": "Branches"
+	},
+	"gotoIssues": {
+		"long_desc": "Goto Issue Tracker",
+		"short_desc": "Goto Issues"
+	},
+	"gotoPullRequests": {
+		"long_desc": "Goto Pull Reqeusts",
+		"short_desc": "Pull Reqeusts"
+	}
 }
 };
 
