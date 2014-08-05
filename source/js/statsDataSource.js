@@ -160,12 +160,24 @@ var descriptions = {"Gmail" : {
 		"short_desc": "Branches"
 	},
 	"gotoIssues": {
-		"long_desc": "Goto Issue Tracker",
+		"long_desc": "Go to Issue Tracker",
 		"short_desc": "Goto Issues"
 	},
 	"gotoPullRequests": {
-		"long_desc": "Goto Pull Reqeusts",
+		"long_desc": "Go to Pull Reqeusts",
 		"short_desc": "Pull Reqeusts"
+	},
+	"search": {
+		"long_desc": "Search GitHub or this repository",
+		"short_desc": "Search"
+	},
+	"fileSearch": {
+		"long_desc": "Typeahead search for a file in this repository",
+		"short_desc": "File search"
+	},
+	"gotoCodeScreen": {
+		"long_desc": "Go to repo home page (aka code screen)",
+		"short_desc": "Repo Home"
 	}
 }
 };
