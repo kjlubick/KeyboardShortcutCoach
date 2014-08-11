@@ -178,6 +178,22 @@ var descriptions = {"Gmail" : {
 	"gotoCodeScreen": {
 		"long_desc": "Go to repo home page (aka code screen)",
 		"short_desc": "Repo Home"
+	},
+	"gotoWiki": {
+		"long_desc": "Go to repository's wiki page",
+		"short_desc": "Goto Wiki"
+	},
+	"reply": {
+		"long_desc": "Reply to a comment",
+		"short_desc": "Reply"
+	},
+	"viewNotifications": {
+		"long_desc": "View Notifications",
+		"short_desc": "Notifications"
+	},
+	"goBackToIssue": {
+		"long_desc": "Go Back to Issues (outdated)",
+		"short_desc": "Back to Issues"
 	}
 }
 };
