@@ -202,6 +202,14 @@ var descriptions = {"Gmail" : {
 	"goBackToIssue": {
 		"long_desc": "Go Back to Issues (outdated)",
 		"short_desc": "Back to Issues"
+	},
+	"createIssue": {
+		"long_desc": "Create an Issue",
+		"short_desc": "Create Issue"
+	},
+	"manageLabels": {
+		"long_desc": "to Add or Remove Labels",
+		"short_desc": "Manage Labels"
 	}
 }
 };
