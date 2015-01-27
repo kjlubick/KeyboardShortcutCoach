@@ -142,7 +142,9 @@ function displayApplication(app) {
 	if (keyTotal > guiTotal) {
 		$('#key-graph').css("height",getFullDisplayHeight());
 		$('#gui-graph').css("height", Math.max(getFullDisplayHeight() * guiTotal / keyTotal, getFullDisplayHeight() * 0.3) );
-		
+		$("#expandLeft").text("Expand to Full Size");
+		$("#expandLeft").removeClass("active");
+
 		$("#expandLeft").on('click', function() {
 			toggleExpansion(0, $(this));
 		});
@@ -150,6 +152,8 @@ function displayApplication(app) {
 	} else {
 		$('#gui-graph').css("height",getFullDisplayHeight());
 		$('#key-graph').css("height", Math.max(getFullDisplayHeight() * keyTotal / guiTotal, getFullDisplayHeight() * 0.3) );
+		$("#expandRight").text("Expand to Full Size");
+		$("#expandRight").removeClass("active");
 
 		$("#expandRight").on('click', function() {
 			toggleExpansion(1, $(this));
