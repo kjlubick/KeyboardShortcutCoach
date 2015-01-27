@@ -67,6 +67,11 @@ function fillGMailShortcuts() {
     createShortcut('-1 != t.processedAriaLabel.indexOf("Important mainly because")', ['-'], 'to Mark as not important', 'markUnimportant');
     createShortcut('t.processedText == "Call phone"', ['g p'], 'to Make a phone call', 'makePhoneCall');
     createShortcut('t.classes.indexOf("J-Ke") != -1 && t.attr("href") && t.attr("href").indexOf("#label") != -1', ['g l'], 'to start searching by <u>L</u>abel', 'searchLabel');
+	//keyboard only
+	createShortcut(undefined, ['['], 'to archive email and go to previous email', 'archiveGoPrev');
+	createShortcut(undefined, [']'], 'to archive email and go to next email', 'archiveGoNext');
+	
+	
 }
 
 function incrementTool(keyName) {

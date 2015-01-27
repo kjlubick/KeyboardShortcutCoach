@@ -148,7 +148,15 @@ var descriptions = {"Gmail" : {
 	"searchLabel": {
 		"long_desc": "Goto Messages with Label",
 		"short_desc": "Goto Label"
-	}
+	},
+	"archiveGoPrev": {
+		"long_desc": "Archive Email and go to Previous Email",
+		"short_desc": "Archive and Prev"
+	},
+	"archiveGoNext": {
+		"long_desc": "Archive Email and go to Next Email",
+		"short_desc": "Archive and Next"
+	},
 },
 "GitHub" : {
 	"toggleMDPreview": {

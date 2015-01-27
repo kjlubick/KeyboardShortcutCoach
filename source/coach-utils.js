@@ -170,6 +170,7 @@ function click(e) {
     }
     //iterate through all conditions
     $.each(shortcuts, function (i, s) {
+		if (!s.guiElements) continue;
         var result = eval(s.guiElements);
         //if condition was met notify and break
         //log(i + ' - Evaling: ' + s.guiElements + ' = ' + result);
